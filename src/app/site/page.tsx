@@ -32,7 +32,7 @@ const Home = () => {
           <div className='bottom-0 top-[50%] bg-gradient-to-t dark:from-background left-0 right-0 absolute z-10'></div>
         </div>
       </section>
-      <section className='flex justify-center items-center flex-col gap-4 md:!mt-20 mt-[-60px]'>
+      <section className='flex justify-center items-center flex-col gap-4 md:!mt-10 mt-[-60px]'>
         <h2 className='text-4xl text-center'> Choose what fits you</h2>
         <p className='text-muted-foreground text-center'>
           Our pricing plans are designed to meet the needs of both small and large marketplaces. {"you're"} not <br /> ready tp commit, you can start for free.
@@ -42,7 +42,7 @@ const Home = () => {
             // WIP Wire Up free product from Stripe
             <Card 
                 key={card.title} 
-                className={clsx('w-[300px] flex flex-col justify-between', {'border-2 border-primary': card.title === "Unlimited Saas",})}
+                className={clsx('w-[300px] flex flex-col justify-between mb-10', {'border-2 border-primary': card.title === "Unlimited Saas",})}
             >
               <CardHeader >
                 <CardTitle className={clsx('', {'text-muted-foreground': card.title !== 'Unlimited Saas',})}>
