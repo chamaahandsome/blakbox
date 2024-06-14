@@ -3,10 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import {
     ClerkProvider,
-    SignInButton,
-    SignedIn,
-    SignedOut,
-    UserButton
   } from '@clerk/nextjs'
 import { dark } from '@clerk/themes';
 
@@ -28,12 +24,6 @@ export default function RootLayout({
     }}>
     <html lang="en">
       <body className={inter.className}>
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
         {children}
         </body>
     </html>
