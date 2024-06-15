@@ -76,7 +76,7 @@ model Permissions {
   email        String
   User         User       @relation(fields: [email], references: [email], onDelete: Cascade)
   vendorId     String
-  Vendor       Vendor @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  Vendor       Vendor     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
   access       Boolean
 
   @@index([vendorId])
@@ -148,7 +148,7 @@ model Tag {
   updatedAt    DateTime @updatedAt
   vendorId     String
 
-  Vendor       Vendor @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  Vendor       Vendor   @relation(fields: [vendorId], references: [id], onDelete: Cascade)
   Ticket       Ticket[]
 
   @@index([vendorId])
@@ -160,7 +160,7 @@ model Pipeline {
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   Lane         Lane[]
-  Vendor       Vendor @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  Vendor       Vendor     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
   vendorId     String
 
   @@index([vendorId])
@@ -213,7 +213,7 @@ model Trigger {
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
   vendorId     String
-  Vendor       Vendor   @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  Vendor       Vendor       @relation(fields: [vendorId], references: [id], onDelete: Cascade)
   Automations  Automation[]
 
   @@index([vendorId])
@@ -228,7 +228,7 @@ model Automation {
   published          Boolean              @default(false)
   Trigger            Trigger?             @relation(fields: [triggerId], references: [id], onDelete: Cascade)
   vendorId           String
-  Vendor             Vendor           @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  Vendor             Vendor               @relation(fields: [vendorId], references: [id], onDelete: Cascade)
   Action             Action[]
   AutomationInstance AutomationInstance[]
 
@@ -273,7 +273,7 @@ model Contact {
   updatedAt    DateTime @updatedAt
   vendorId     String
 
-  Vendor       Vendor @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  Vendor       Vendor   @relation(fields: [vendorId], references: [id], onDelete: Cascade)
   Ticket       Ticket[]
 
   @@index([vendorId])
@@ -287,7 +287,7 @@ model Media {
   vendorId     String
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  Vendor       Vendor @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  Vendor       Vendor     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
 
   @@index([vendorId])
 }
@@ -302,7 +302,7 @@ model Funnel {
   subDomainName String?      @unique
   favicon       String?      @db.Text
   vendorId      String
-  Vendor        Vendor   @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  Vendor        Vendor       @relation(fields: [vendorId], references: [id], onDelete: Cascade)
   FunnelPages   FunnelPage[]
   liveProducts  String?      @default("[]")
   ClassName     ClassName[]
@@ -359,7 +359,7 @@ model VendorSidebarOption {
   icon         Icon        @default(info)
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
-  Vendor       Vendor? @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  Vendor       Vendor?     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
   vendorId     String?
 
   @@index([vendorId])
@@ -383,7 +383,7 @@ model Invitation {
 }
 
 model Notification {
-  id           String  @id @default(uuid())
+  id           String      @id @default(uuid())
   notification String
   marketId     String
   vendorId     String?
@@ -391,10 +391,10 @@ model Notification {
 
   User         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   Market       Market      @relation(fields: [marketId], references: [id], onDelete: Cascade)
-  Vendor       Vendor? @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  Vendor       Vendor?     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
 
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 
   @@index([marketId])
   @@index([vendorId])
@@ -419,8 +419,8 @@ model Subscription {
   currentPeriodEndDate DateTime
   subscritiptionId     String   @unique
 
-  marketId             String? @unique
-  Market               Market? @relation(fields: [marketId], references: [id])
+  marketId             String?  @unique
+  Market               Market?  @relation(fields: [marketId], references: [id])
 
   @@index([customerId])
 }
