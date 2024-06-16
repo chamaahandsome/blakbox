@@ -1,6 +1,6 @@
 'use server';
 
-import { currentUser } from "@clerk/nextjs/server";
+import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { db } from "./db";
 import { redirect } from "next/navigation";
 import { User } from "@prisma/client";
@@ -81,6 +81,45 @@ export const saveActivityLogNotifications = async ({
         })
         if (response) foundMarketId = response.marketId
     }
+    if (vendorId) {
+        await db.notification.create({
+            data: {
+                notification: `${userData.name} | ${description}`,
+                User: {
+                    connect: {
+                        id: userData.id,
+                    },
+                },
+                Market: {
+                    connect: {
+                        id: foundMarketId,
+                    },
+                },
+                Vendor: {
+                    connect: {
+                        id: vendorId,
+                    },
+                },
+            },
+        })
+    }
+    else {
+        await db.notofication.create({
+            data: {
+                notification: `${userData.name} | ${description}`,
+                User: {
+                    connect: {
+                        id: userData.id,
+                    },
+                },
+                Market: {
+                    connect: {
+                        id: foundMarketId,
+                    },
+                },
+            }
+        })
+    }
 }
 
 export const createTeamUser = async (marketId: string, user:User) => {
@@ -101,7 +140,7 @@ export const verifyAndAcceptInvitation = async () => {
         }
      })
 
-     if (!invitationExists) {
+     if (invitationExists) {
         const userDetails = await createTeamUser(invitationExists.marketId, {
             email: invitationExists.email,
             marketId: invitationExists.marketId,
@@ -112,6 +151,34 @@ export const verifyAndAcceptInvitation = async () => {
             createdAt: new Date(),
             updatedAt: new Date(),
         })
+        await saveActivityLogNotifications({
+            marketId: invitationExists?.marketId,
+            description: 'User accepted invitation',
+            vendorId: undefined
+         })
+
+         if (userDetails) {
+            await clerkClient.users.updateUserMetadata(user.id, {
+                privateMetadata:{
+                    role:userDetails.role || 'VENDOR_USER',
+                }
+            })
+
+            await db.invitation.delet({
+                where: { email:userDetails.email},
+            })
+
+            return userDetails.marketId
+
+         } else return null
+     } else {
+        const market = await db.user.findUnique({
+            where: {
+                email: user.emailAddresses[0].emailAddress,
+            },
+        })
+
+        return market ? market.marketId : null
+
      }
-    
 }
