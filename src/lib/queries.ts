@@ -282,3 +282,19 @@ export const updateMarketDetails = async (
       console.log(error)
     }
   }
+
+
+  export const getNotificationAndUser = async (marketId: string) => {
+    try {
+      const response = await db.notification.findMany({
+        where: { marketId },
+        include: { User: true },
+        orderBy: {
+          createdAt: 'desc',
+        },
+      })
+      return response
+    } catch (error) {
+      console.log(error)
+    }
+  }

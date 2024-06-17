@@ -1,4 +1,5 @@
 import BarChart from '@/components/icons/bar_chart'
+import BlakboxCategory from '@/components/icons/blakbox-category'
 import Calendar from '@/components/icons/calendar'
 import CheckCircle from '@/components/icons/check_circled'
 import Chip from '@/components/icons/chip'
@@ -16,7 +17,6 @@ import Notification from '@/components/icons/notification'
 import Payment from '@/components/icons/payment'
 import Person from '@/components/icons/person'
 import Pipelines from '@/components/icons/pipelines'
-import PluraCategory from '@/components/icons/plura-category'
 import Power from '@/components/icons/power'
 import Receipt from '@/components/icons/receipt'
 import Send from '@/components/icons/send'
@@ -199,7 +199,7 @@ export const pricingCards = [
     {
       value: 'category',
       label: 'Category',
-      path: PluraCategory,
+      path: BlakboxCategory,
     },
     {
       value: 'clipboardIcon',

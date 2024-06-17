@@ -118,11 +118,10 @@ const MarketDetails = ({data}: Props) => {
       }
 
       newUserData = await initUser({ role: 'MARKET_OWNER' })
-      if (!data?.customerId && !custId) return
+      if (!data?.id) {
 
-      const response = await upsertMarket({
+     await upsertMarket({
         id: data?.id ? data.id : v4(),
-        customerId: data?.customerId || custId || '',
         address: values.address,
         marketLogo: values.marketLogo,
         city: values.city,
@@ -138,13 +137,12 @@ const MarketDetails = ({data}: Props) => {
         connectAccountId: '',
         goal: 5,
       })
+    }
       toast({
         title: 'Created Market',
       })
-      if (data?.id) return router.refresh()
-      if (response) {
-        return router.refresh()
-      }
+       return router.refresh()
+
     } catch (error) {
       console.log(error)
       toast({
