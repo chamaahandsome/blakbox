@@ -3,7 +3,7 @@
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { db } from "./db";
 import { redirect } from "next/navigation";
-import { User } from "@prisma/client";
+import { Market, Plan, User } from "@prisma/client";
 
 export const getAuthUserDetails = async () => {
     const user = await currentUser()
@@ -34,7 +34,7 @@ export const getAuthUserDetails = async () => {
     return userData
 };
 
-export const saveActivityLogNotifications = async ({
+export const saveActivityLogsNotifications = async ({
     marketId,
     description,
     vendorId,
@@ -104,7 +104,7 @@ export const saveActivityLogNotifications = async ({
         })
     }
     else {
-        await db.notofication.create({
+        await db.notification.create({
             data: {
                 notification: `${userData.name} | ${description}`,
                 User: {
@@ -151,7 +151,7 @@ export const verifyAndAcceptInvitation = async () => {
             createdAt: new Date(),
             updatedAt: new Date(),
         })
-        await saveActivityLogNotifications({
+        await saveActivityLogsNotifications({
             marketId: invitationExists?.marketId,
             description: 'User accepted invitation',
             vendorId: undefined
@@ -164,7 +164,7 @@ export const verifyAndAcceptInvitation = async () => {
                 }
             })
 
-            await db.invitation.delet({
+            await db.invitation.delete({
                 where: { email:userDetails.email},
             })
 
@@ -182,3 +182,103 @@ export const verifyAndAcceptInvitation = async () => {
 
      }
 }
+
+export const updateMarketDetails = async (
+    marketId: string,
+    marketDetails: Partial<Market>
+  ) => {
+    const response = await db.market.update({
+      where: { id: marketId },
+      data: { ...marketDetails },
+    })
+    return response
+  }
+
+  export const deleteMarket = async (marketId: string) => {
+    const response = await db.market.delete({
+      where: { id: marketId },
+    })
+    return response
+  }
+
+  export const initUser = async (newUser: Partial<User>) => {
+    const user = await currentUser()
+    if (!user) return
+  
+    const userData = await db.user.upsert({
+      where: {
+        email: user.emailAddresses[0].emailAddress,
+      },
+      update: newUser,
+      create: {
+        id: user.id,
+        avatarUrl: user.imageUrl,
+        email: user.emailAddresses[0].emailAddress,
+        name: `${user.firstName} ${user.lastName}`,
+        role: newUser.role || 'VENDOR_USER',
+      },
+    })
+  
+    await clerkClient.users.updateUserMetadata(user.id, {
+      privateMetadata: {
+        role: newUser.role || 'VENDOR_USER',
+      },
+    })
+  
+    return userData
+  }
+
+  export const upsertMarket = async (market: Market, price?: Plan) => {
+    if (!market.companyEmail) return null
+    try {
+      const marketDetails = await db.market.upsert({
+        where: {
+          id: market.id,
+        },
+        update: market,
+        create: {
+          users: {
+            connect: { email: market.companyEmail },
+          },
+          ...market,
+          SidebarOption: {
+            create: [
+              {
+                name: 'Dashboard',
+                icon: 'category',
+                link: `/market/${market.id}`,
+              },
+              {
+                name: 'Launchpad',
+                icon: 'clipboardIcon',
+                link: `/market/${market.id}/launchpad`,
+              },
+              {
+                name: 'Billing',
+                icon: 'payment',
+                link: `/market/${market.id}/billing`,
+              },
+              {
+                name: 'Settings',
+                icon: 'settings',
+                link: `/market/${market.id}/settings`,
+              },
+              {
+                name: 'Vendors',
+                icon: 'person',
+                link: `/market/${market.id}/all-vendors`,
+              },
+              {
+                name: 'Team',
+                icon: 'shield',
+                link: `/market/${market.id}/team`,
+              },
+            ],
+          },
+        },
+      })
+      return marketDetails
+    } catch (error) {
+      console.log(error)
+    }
+  }
