@@ -1,3 +1,5 @@
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,40 +15,35 @@ body {
   box-sizing: border-box;
 }
 
-/* 
-R (0)
-G (110)
-B (255 */
-
 @layer base {
   :root {
-    --background: 216 100% 98.04%;
-    --foreground: 213.6 100% 4.9%;
+    --background: 36 100% 98.04%; /* Light Orange */
+    --foreground: 24 100% 5%; /* Very dark Orange-black */
 
-    --primary: 214.12 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 24 100% 50%; /* Pure Orange */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --card: 216 100% 98.04%;
-    --card-foreground: 213.6 100% 4.9%;
+    --card: 36 100% 98.04%; /* Light Orange */
+    --card-foreground: 24 100% 5%; /* Very dark Orange-black */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 213.6 100% 4.9%;
+    --popover: 0 0% 100%; /* White */
+    --popover-foreground: 24 100% 5%; /* Very dark Orange-black */
 
-    --secondary: 214.74 100% 92.55%;
-    --secondary-foreground: 216 100% 0.98%;
+    --secondary: 24 100% 92.55%; /* Very light Orange */
+    --secondary-foreground: 24 100% 1%; /* Very dark Orange-black */
 
-    --muted: 213.6 100% 95.1%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 24 100% 95.1%; /* Very light Orange */
+    --muted-foreground: 0 0% 40%; /* Medium gray */
 
-    --accent: 213.6 100% 95.1%;
-    --accent-foreground: 214.12 100% 50%;
+    --accent: 24 100% 95.1%; /* Very light Orange */
+    --accent-foreground: 24 100% 50%; /* Pure Orange */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%; /* Bright Red */
+    --destructive-foreground: 24 40% 98%; /* Very pale Orange */
 
-    --border: 0 0% 90.2%;
-    --input: 0 0% 90.2%;
-    --ring: 214.12 100% 50%;
+    --border: 0 0% 90.2%; /* Light gray */
+    --input: 0 0% 90.2%; /* Light gray */
+    --ring: 24 100% 50%; /* Pure Orange */
 
     --radius: 0.5rem;
   }
@@ -57,36 +54,36 @@ B (255 */
        URL: https://gradient.page */
 
     /* CSS: .bg-gradient { background: var(--gradient) } */
-    --gradient: linear-gradient(to top left, #007adf, #00ecbc);
+    --gradient: linear-gradient(to top left, #ff6600, #ffaa00); /* Gradient of Oranges */
 
-    --background: 220 65% 3.52%;
-    --foreground: 220 10% 97.2%;
+    --background: 24 65% 3.52%; /* Very dark Orange */
+    --foreground: 24 10% 97.2%; /* Very light Orange */
 
-    --muted: 220 50% 13.2%;
-    --muted-foreground: 220 10% 54.4%;
+    --muted: 24 50% 13.2%; /* Dark muted Orange */
+    --muted-foreground: 24 10% 54.4%; /* Medium muted Orange */
 
-    --popover: 220 45% 5.72%;
-    --popover-foreground: 220 10% 97.2%;
+    --popover: 24 45% 5.72%; /* Very dark Orange */
+    --popover-foreground: 24 10% 97.2%; /* Very light Orange */
 
-    --card: 220 45% 5.72%;
-    --card-foreground: 220 10% 97.2%;
+    --card: 24 45% 5.72%; /* Very dark Orange */
+    --card-foreground: 24 10% 97.2%; /* Very light Orange */
 
-    --border: 220 50% 13.2%;
-    --input: 220 50% 13.2%;
+    --border: 24 50% 13.2%; /* Dark muted Orange */
+    --input: 24 50% 13.2%; /* Dark muted Orange */
 
-    --primary: 220 100% 44%;
-    --primary-foreground: 220 10% 97.2%;
+    --primary: 24 100% 44%; /* Darker Orange */
+    --primary-foreground: 24 10% 97.2%; /* Very light Orange */
 
-    --secondary: 220 50% 13.2%;
-    --secondary-foreground: 220 10% 97.2%;
+    --secondary: 24 50% 13.2%; /* Dark muted Orange */
+    --secondary-foreground: 24 10% 97.2%; /* Very light Orange */
 
-    --accent: 220 50% 13.2%;
-    --accent-foreground: 220 10% 97.2%;
+    --accent: 24 50% 13.2%; /* Dark muted Orange */
+    --accent-foreground: 24 10% 97.2%; /* Very light Orange */
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 220 10% 97.2%;
+    --destructive: 0 62.8% 30.6%; /* Dark Red */
+    --destructive-foreground: 24 10% 97.2%; /* Very light Orange */
 
-    --ring: 220 100% 44%;
+    --ring: 24 100% 44%; /* Darker Orange */
   }
 }
 
@@ -100,7 +97,7 @@ B (255 */
 }
 
 .dotPattern {
-  background-image: radial-gradient(rgb(35, 40, 68) 1px, transparent 1px);
+  background-image: radial-gradient(rgb(68, 40, 35) 1px, transparent 1px); /* Dark Orange-brown */
   background-size: 25px 25px;
 }
 

@@ -3,7 +3,8 @@
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { db } from "./db";
 import { redirect } from "next/navigation";
-import { Market, Plan, User } from "@prisma/client";
+import { Market, Plan, User, Vendor } from "@prisma/client";
+import { v4 } from "uuid";
 
 export const getAuthUserDetails = async () => {
     const user = await currentUser()
@@ -297,4 +298,84 @@ export const updateMarketDetails = async (
     } catch (error) {
       console.log(error)
     }
+  }
+
+  export const upsertVendor = async (vendor: Vendor) => {
+    if (!vendor.companyEmail) return null
+    const marketOwner = await db.user.findFirst({
+      where: {
+        Market: {
+          id: vendor.marketId,
+        },
+        role: 'MARKET_OWNER',
+      },
+    })
+    if (!marketOwner) return console.log('🔴Erorr could not create vendor')
+    const permissionId = v4()
+    const response = await db.vendor.upsert({
+      where: { id: vendor.id },
+      update: vendor,
+      create: {
+        ...vendor,
+        Permissions: {
+          create: {
+            access: true,
+            email: marketOwner.email,
+            id: permissionId,
+          },
+          connect: {
+            vendorId: vendor.id,
+            id: permissionId,
+          },
+        },
+        Pipeline: {
+          create: { name: 'Lead Cycle' },
+        },
+        SidebarOption: {
+          create: [
+            {
+              name: 'Launchpad',
+              icon: 'clipboardIcon',
+              link: `/vendor/${vendor.id}/launchpad`,
+            },
+            {
+              name: 'Settings',
+              icon: 'settings',
+              link: `/vendor/${vendor.id}/settings`,
+            },
+            {
+              name: 'Funnels',
+              icon: 'pipelines',
+              link: `/vendor/${vendor.id}/funnels`,
+            },
+            {
+              name: 'Media',
+              icon: 'database',
+              link: `/vendor/${vendor.id}/media`,
+            },
+            {
+              name: 'Automations',
+              icon: 'chip',
+              link: `/vendor/${vendor.id}/automations`,
+            },
+            {
+              name: 'Pipelines',
+              icon: 'flag',
+              link: `/vendor/${vendor.id}/pipelines`,
+            },
+            {
+              name: 'Contacts',
+              icon: 'person',
+              link: `/vendor/${vendor.id}/contacts`,
+            },
+            {
+              name: 'Dashboard',
+              icon: 'category',
+              link: `/vendor/${vendor.id}`,
+            },
+          ],
+        },
+      },
+    })
+    return response
   }

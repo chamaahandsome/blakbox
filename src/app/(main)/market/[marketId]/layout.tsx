@@ -47,16 +47,17 @@ const layout = async ({ children, params }: Props) => {
         type="market"
       />
       <div className="md:pl-[300px]">
-        {/* <InfoBar
+        <InfoBar
           notifications={allNoti}
           role={allNoti.User?.role}
-        /> */}
+        />
         <div className="relative">
-          {/* <BlurPage>{children}</BlurPage> */}
+          <div className="p-4">{children}</div>
+          <BlurPage>{children}</BlurPage>
         </div>
       </div>
     </div>
   )
 }
 
-export default layout
+export default layout;

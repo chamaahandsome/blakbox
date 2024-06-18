@@ -49,7 +49,7 @@ const MenuOptions = ({
   user,
   defaultOpen,
 }: Props) => {
-//   const { setOpen } = useModal()
+  const { setOpen } = useModal()
   const [isMounted, setIsMounted] = useState(false)
 
   const openState = useMemo(
@@ -125,7 +125,7 @@ const MenuOptions = ({
             </PopoverTrigger>
             <PopoverContent className="w-80 h-80 mt-4 z-[200]">
               <Command className="rounded-lg">
-                <CommandInput placeholder="Search Accounts..." />
+                <CommandInput placeholder="Search Vendors..." />
                 <CommandList className="pb-16">
                   <CommandEmpty> No results found</CommandEmpty>
                   {(user?.role === 'MARKET_OWNER' ||
@@ -179,7 +179,7 @@ const MenuOptions = ({
                         </CommandItem>
                       </CommandGroup>
                     )}
-                  <CommandGroup heading="Accounts">
+                  <CommandGroup heading="Vendors">
                     {!!vendors
                       ? vendors.map((vendor) => (
                           <CommandItem key={vendor.id}>
@@ -228,31 +228,31 @@ const MenuOptions = ({
                             )}
                           </CommandItem>
                         ))
-                      : 'No Accounts'}
+                      : 'No Vendors Found'}
                   </CommandGroup>
                 </CommandList>
                 {(user?.role === 'MARKET_OWNER' ||
                   user?.role === 'MARKET_ADMIN') && (
                   <SheetClose>
-                    {/* <Button
+                    <Button
                       className="w-full flex gap-2"
                       onClick={() => {
-                        setOpen( */}
-                        //   <CustomModal
-                        //     title="Create A Vendor"
-                        //     subheading="You can switch between your market account and the vendor from the sidebar"
-                        //   >
-                        //     <VendorDetails
-                        //       marketDetails={user?.Market as Market}
-                        //       userId={user?.id as string}
-                        //       userName={user?.name}
-                        //     />
-                        //   </CustomModal>
+                        setOpen(
+                           <CustomModal
+                             title="Create A Vendor"
+                             subheading="You can switch between your market account and the vendor from the sidebar"
+                           >
+                             <VendorDetails
+                               marketDetails={user?.Market as Market}
+                               userId={user?.id as string}
+                               userName={user?.name}
+                             />
+                           </CustomModal>
                         )
                       }}
                     >
                       <PlusCircleIcon size={15} />
-                      Create Sub Account
+                      Create Vendor
                     </Button>
                   </SheetClose>
                 )}
