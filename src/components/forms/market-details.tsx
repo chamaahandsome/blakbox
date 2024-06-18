@@ -17,7 +17,7 @@ import FileUpload from '../global/file-upload'
 import { Input } from '../ui/input'
 import { Switch } from '../ui/switch'
 import { Button } from '../ui/button'
-import { deleteMarket, initUser, saveActivityLogsNotifications, updateMarketDetails, upsertMarket } from '@/lib/queries'
+import { deleteMarket, initUser, saveActivityLogsNotification, updateMarketDetails, upsertMarket } from '@/lib/queries'
 import Loading from '../global/loading'
 import { 
   AlertDialogAction, 
@@ -180,7 +180,7 @@ const MarketDetails = ({data}: Props) => {
     <AlertDialog>
       <Card className='w-full'>
         <CardHeader>
-          <CardTitle>Market Information</CardTitle>
+          <CardTitle>Market/Convention Information</CardTitle>
           <CardDescription>
             Lets create you market. You can edit your market settings later from the market settings tab.
           </CardDescription>
@@ -390,7 +390,7 @@ const MarketDetails = ({data}: Props) => {
                     onValueChange={async (val) => {
                       if (!data?.id) return
                       await updateMarketDetails(data.id, { goal: val })
-                      await saveActivityLogsNotifications({
+                      await saveActivityLogsNotification({
                         marketId: data.id,
                         description: `Updated your market goal to | ${val} Vendor`,
                         vendorId: undefined,

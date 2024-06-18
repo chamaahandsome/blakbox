@@ -28,7 +28,7 @@ import {
 import FileUpload from '../global/file-upload'
 import { Market, Vendor } from '@prisma/client'
 import { useToast } from '../ui/use-toast'
-import { saveActivityLogsNotifications, upsertVendor } from '@/lib/queries'
+import { saveActivityLogsNotification, upsertVendor } from '@/lib/queries'
 import { useEffect } from 'react'
 import Loading from '../global/loading'
 import { useModal } from '@/providers/modal-provider'
@@ -98,7 +98,7 @@ const VendorDetails: React.FC<VendorDetailsProps> = ({
         goal: 5000,
       })
       if (!response) throw new Error('No response from server')
-      await saveActivityLogsNotifications({
+      await saveActivityLogsNotification({
         marketId: response.marketId,
         description: `${userName} | updated vendor | ${response.name}`,
         vendorId: response.id,

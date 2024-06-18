@@ -55,11 +55,12 @@ const InfoBar = ({ notifications, vendorId, className, role }: Props) => {
           <UserButton afterSignOutUrl="/" />
           <Sheet>
             <SheetTrigger>
-              <div className="rounded-full w-9 h-9 bg-primary flex items-center justify-center text-white">
+              <div className="rounded-full w-8 h-8 bg-primary flex items-center justify-center text-white">
                 <Bell size={17} />
               </div>
             </SheetTrigger>
-            <SheetContent className="mt-4 mr-4 pr-4 overflow-scroll">
+            {/* <SheetContent className="mt-4 mr-4 pr-4 overflow-scroll"> */}
+            <SheetContent className="mt-4 mr-4 pr-4 flex flex-col">
               <SheetHeader className="text-left">
                 <SheetTitle>Notifications</SheetTitle>
                 <SheetDescription>
@@ -80,7 +81,7 @@ const InfoBar = ({ notifications, vendorId, className, role }: Props) => {
                     <Avatar>
                       <AvatarImage
                         src={notification.User.avatarUrl}
-                        alt="Profile Picture"
+                        alt="Profile Pic"
                       />
                       <AvatarFallback className="bg-primary">
                         {notification.User.name.slice(0, 2).toUpperCase()}

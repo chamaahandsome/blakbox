@@ -1,26 +1,25 @@
-// import {
-//     Contact,
-//     Lane,
-//     Notification,
-//     Prisma,
-//     Role,
-//     Tag,
-//     Ticket,
-//     User,
-//   } from '@prisma/client'
-//   import {
-//     _getTicketsWithAllRelations,
-//     getAuthUserDetails,
-//     getFunnels,
-//     getMedia,
-//     getPipelineDetails,
-//     getTicketsWithTags,
-//     getUserPermissions,
-//   } from './queries'
+import {
+    Contact,
+    Lane,
+    Notification,
+    Prisma,
+    Role,
+    Tag,
+    Ticket,
+    User,
+  } from '@prisma/client'
+  import {
+    _getTicketsWithAllRelations,
+    getAuthUserDetails,
+    getFunnels,
+    getMedia,
+    getPipelineDetails,
+    getTicketsWithTags,
+    getUserPermissions,
+  } from './queries'
 //   import { db } from './db'
 //   import { z } from 'zod'
 
-import { Role } from "@prisma/client"
 
   
 //   import Stripe from 'stripe'
@@ -40,9 +39,9 @@ import { Role } from "@prisma/client"
       } & Notification)[]
     | undefined
   
-//   export type UserWithPermissionsAndVendors = Prisma.PromiseReturnType<
-//     typeof getUserPermissions
-//   >
+  export type UserWithPermissionsAndVendors = Prisma.PromiseReturnType<
+    typeof getUserPermissions
+  >
   
 //   export const FunnelPageSchema = z.object({
 //     name: z.string().min(1),
@@ -61,8 +60,8 @@ import { Role } from "@prisma/client"
 //     })
 //   }
   
-//   export type AuthUserWithMarketSigebarOptionsVendors =
-//     Prisma.PromiseReturnType<typeof getAuthUserDetails>
+  export type AuthUserWithMarketSidebarOptionsVendors =
+    Prisma.PromiseReturnType<typeof getAuthUserDetails>
   
 //   export type UsersWithMarketVendorPermissionsSidebarOptions =
 //     Prisma.PromiseReturnType<
