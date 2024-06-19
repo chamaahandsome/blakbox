@@ -5,11 +5,11 @@ import { db } from "./db";
 import { redirect } from "next/navigation";
 import { Market, Plan, Role, User, Vendor } from "@prisma/client";
 import { v4 } from "uuid";
-// import {
-//   CreateFunnelFormSchema,
-//   CreateMediaType,
-//   UpsertFunnelPage,
-// } from './types'
+import {
+  CreateFunnelFormSchema,
+  CreateMediaType,
+  UpsertFunnelPage,
+} from './types'
 // import { z } from 'zod'
 // import { revalidatePath } from 'next/cache'
 
@@ -498,39 +498,39 @@ export const updateMarketDetails = async (
     return resposne
   }
   
-  // export const getMedia = async (vendorId: string) => {
-  //   const mediafiles = await db.vendor.findUnique({
-  //     where: {
-  //       id: vendorId,
-  //     },
-  //     include: { Media: true },
-  //   })
-  //   return mediafiles
-  // }
+  export const getMedia = async (vendorId: string) => {
+    const mediafiles = await db.vendor.findUnique({
+      where: {
+        id: vendorId,
+      },
+      include: { Media: true },
+    })
+    return mediafiles
+  }
   
-  // export const createMedia = async (
-  //   vendorId: string,
-  //   mediaFile: CreateMediaType
-  // ) => {
-  //   const response = await db.media.create({
-  //     data: {
-  //       link: mediaFile.link,
-  //       name: mediaFile.name,
-  //       vendorId: vendorId,
-  //     },
-  //   })
+  export const createMedia = async (
+    vendorId: string,
+    mediaFile: CreateMediaType
+  ) => {
+    const response = await db.media.create({
+      data: {
+        link: mediaFile.link,
+        name: mediaFile.name,
+        vendorId: vendorId,
+      },
+    })
   
-  //   return response
-  // }
+    return response
+  }
   
-  // export const deleteMedia = async (mediaId: string) => {
-  //   const response = await db.media.delete({
-  //     where: {
-  //       id: mediaId,
-  //     },
-  //   })
-  //   return response
-  // }
+  export const deleteMedia = async (mediaId: string) => {
+    const response = await db.media.delete({
+      where: {
+        id: mediaId,
+      },
+    })
+    return response
+  }
   
   // export const getPipelineDetails = async (pipelineId: string) => {
   //   const response = await db.pipeline.findUnique({

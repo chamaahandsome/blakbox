@@ -68,9 +68,9 @@ import {
       typeof __getUsersWithMarketVendorPermissionsSidebarOptions
     >
   
-//   export type GetMediaFiles = Prisma.PromiseReturnType<typeof getMedia>
+  export type GetMediaFiles = Prisma.PromiseReturnType<typeof getMedia>
   
-//   export type CreateMediaType = Prisma.MediaCreateWithoutVendorInput
+  export type CreateMediaType = Prisma.MediaCreateWithoutVendorInput
   
 //   export type TicketAndTags = Ticket & {
 //     Tags: Tag[]
