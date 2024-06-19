@@ -82,6 +82,12 @@ const SendInvitation: React.FC<SendInvitationProps> = ({ marketId }) => {
           invitation sent out to their email, will not receive another
           invitation.
         </CardDescription>
+        <CardDescription>
+          Account User: Can view and edit the account.
+        </CardDescription>
+        <CardDescription>
+          Account Guest: Can view the account.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>

@@ -111,7 +111,7 @@ export const columns: ColumnDef<UsersWithMarketVendorPermissionsSidebarOptions>[
                     key={account.id}
                     className="bg-slate-600 w-fit whitespace-nowrap"
                   >
-                    Sub Account - {account.Vendor.name}
+                    Vendor - {account.Vendor.name}
                   </Badge>
                 ))
               ) : (

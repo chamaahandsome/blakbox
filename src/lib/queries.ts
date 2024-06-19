@@ -897,14 +897,14 @@ export const updateMarketDetails = async (
   //   return response
   // }
   
-  // export const getPipelines = async (vendorId: string) => {
-  //   const response = await db.pipeline.findMany({
-  //     where: { vendorId: vendorId },
-  //     include: {
-  //       Lane: {
-  //         include: { Tickets: true },
-  //       },
-  //     },
-  //   })
-  //   return response
-  // }
+  export const getPipelines = async (vendorId: string) => {
+    const response = await db.pipeline.findMany({
+      where: { vendorId: vendorId },
+      include: {
+        Lane: {
+          include: { Tickets: true },
+        },
+      },
+    })
+    return response
+  }
