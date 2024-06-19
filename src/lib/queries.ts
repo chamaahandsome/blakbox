@@ -3,7 +3,7 @@
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { db } from "./db";
 import { redirect } from "next/navigation";
-import { Market, Plan, User, Vendor } from "@prisma/client";
+import { Market, Plan, Role, User, Vendor } from "@prisma/client";
 import { v4 } from "uuid";
 // import {
 //   CreateFunnelFormSchema,
@@ -433,70 +433,70 @@ export const updateMarketDetails = async (
     }
   }
   
-  // export const getVendorDetails = async (vendorId: string) => {
-  //   const response = await db.vendor.findUnique({
-  //     where: {
-  //       id: vendorId,
-  //     },
-  //   })
-  //   return response
-  // }
+  export const getVendorDetails = async (vendorId: string) => {
+    const response = await db.vendor.findUnique({
+      where: {
+        id: vendorId,
+      },
+    })
+    return response
+  }
   
-  // export const deleteVendor = async (vendorId: string) => {
-  //   const response = await db.vendor.delete({
-  //     where: {
-  //       id: vendorId,
-  //     },
-  //   })
-  //   return response
-  // }
+  export const deleteVendor = async (vendorId: string) => {
+    const response = await db.vendor.delete({
+      where: {
+        id: vendorId,
+      },
+    })
+    return response
+  }
   
-  // export const deleteUser = async (userId: string) => {
-  //   await clerkClient.users.updateUserMetadata(userId, {
-  //     privateMetadata: {
-  //       role: undefined,
-  //     },
-  //   })
-  //   const deletedUser = await db.user.delete({ where: { id: userId } })
+  export const deleteUser = async (userId: string) => {
+    await clerkClient.users.updateUserMetadata(userId, {
+      privateMetadata: {
+        role: undefined,
+      },
+    })
+    const deletedUser = await db.user.delete({ where: { id: userId } })
   
-  //   return deletedUser
-  // }
+    return deletedUser
+  }
   
-  // export const getUser = async (id: string) => {
-  //   const user = await db.user.findUnique({
-  //     where: {
-  //       id,
-  //     },
-  //   })
+  export const getUser = async (id: string) => {
+    const user = await db.user.findUnique({
+      where: {
+        id,
+      },
+    })
   
-  //   return user
-  // }
+    return user
+  }
   
-  // export const sendInvitation = async (
-  //   role: Role,
-  //   email: string,
-  //   marketId: string
-  // ) => {
-  //   const resposne = await db.invitation.create({
-  //     data: { email, marketId, role },
-  //   })
+  export const sendInvitation = async (
+    role: Role,
+    email: string,
+    marketId: string
+  ) => {
+    const resposne = await db.invitation.create({
+      data: { email, marketId, role },
+    })
   
-  //   try {
-  //     const invitation = await clerkClient.invitations.createInvitation({
-  //       emailAddress: email,
-  //       redirectUrl: process.env.NEXT_PUBLIC_URL,
-  //       publicMetadata: {
-  //         throughInvitation: true,
-  //         role,
-  //       },
-  //     })
-  //   } catch (error) {
-  //     console.log(error)
-  //     throw error
-  //   }
+    try {
+      const invitation = await clerkClient.invitations.createInvitation({
+        emailAddress: email,
+        redirectUrl: process.env.NEXT_PUBLIC_URL,
+        publicMetadata: {
+          throughInvitation: true,
+          role,
+        },
+      })
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
   
-  //   return resposne
-  // }
+    return resposne
+  }
   
   // export const getMedia = async (vendorId: string) => {
   //   const mediafiles = await db.vendor.findUnique({
@@ -806,9 +806,9 @@ export const updateMarketDetails = async (
   //   return response
   // }
   
-  // export const getFunnels = async (subacountId: string) => {
+  // export const getFunnels = async (vendorId: string) => {
   //   const funnels = await db.funnel.findMany({
-  //     where: { vendorId: subacountId },
+  //     where: { vendorId: vendorId },
   //     include: { FunnelPages: true },
   //   })
   

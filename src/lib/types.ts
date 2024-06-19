@@ -48,25 +48,25 @@ import {
 //     pathName: z.string().optional(),
 //   })
   
-//   const __getUsersWithMarketVendorPermissionsSidebarOptions = async (
-//     marketId: string
-//   ) => {
-//     return await db.user.findFirst({
-//       where: { Market: { id: marketId } },
-//       include: {
-//         Market: { include: { Vendor: true } },
-//         Permissions: { include: { Vendor: true } },
-//       },
-//     })
-//   }
+  const __getUsersWithMarketVendorPermissionsSidebarOptions = async (
+    marketId: string
+  ) => {
+    return await db.user.findFirst({
+      where: { Market: { id: marketId } },
+      include: {
+        Market: { include: { Vendor: true } },
+        Permissions: { include: { Vendor: true } },
+      },
+    })
+  }
   
   export type AuthUserWithMarketSidebarOptionsVendors =
     Prisma.PromiseReturnType<typeof getAuthUserDetails>
   
-//   export type UsersWithMarketVendorPermissionsSidebarOptions =
-//     Prisma.PromiseReturnType<
-//       typeof __getUsersWithMarketVendorPermissionsSidebarOptions
-//     >
+  export type UsersWithMarketVendorPermissionsSidebarOptions =
+    Prisma.PromiseReturnType<
+      typeof __getUsersWithMarketVendorPermissionsSidebarOptions
+    >
   
 //   export type GetMediaFiles = Prisma.PromiseReturnType<typeof getMedia>
   

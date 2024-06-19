@@ -183,7 +183,7 @@ const VendorDetails: React.FC<VendorDetailsProps> = ({
                 name="companyEmail"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormLabel>Acount Email</FormLabel>
+                    <FormLabel>Vendor Email</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Email"
@@ -202,7 +202,7 @@ const VendorDetails: React.FC<VendorDetailsProps> = ({
                 name="companyPhone"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormLabel>Acount Phone Number</FormLabel>
+                    <FormLabel>Vendor Phone Number</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Phone"

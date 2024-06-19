@@ -200,7 +200,7 @@ const UserDetails = ({ id, type, vendors, userData }: Props) => {
       } else {
         toast({
           variant: 'destructive',
-          title: 'Oppse!',
+          title: 'Sorry!',
           description: 'Could not update user information',
         })
       }
