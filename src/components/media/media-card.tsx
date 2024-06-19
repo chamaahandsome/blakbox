@@ -80,7 +80,7 @@ const MediaCard = ({ file }: Props) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="text-left">
-            Are you absolutely sure?
+            Are you sure?
           </AlertDialogTitle>
           <AlertDialogDescription className="text-left">
             Are you sure you want to delete this file? All vendor using this

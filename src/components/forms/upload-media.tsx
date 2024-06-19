@@ -55,14 +55,14 @@ const UploadMediaForm = ({ vendorId }: Props) => {
         vendorId,
       })
 
-      toast({ title: 'Succes', description: 'Uploaded media' })
+      toast({ title: 'Success', description: 'Uploaded media file' })
       router.refresh()
     } catch (error) {
       console.log(error)
       toast({
         variant: 'destructive',
         title: 'Failed',
-        description: 'Could not uploaded media',
+        description: 'Could not uploaded media file',
       })
     }
   }
@@ -86,7 +86,7 @@ const UploadMediaForm = ({ vendorId }: Props) => {
                   <FormLabel>File Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Your market name"
+                      placeholder="Your file name"
                       {...field}
                     />
                   </FormControl>
