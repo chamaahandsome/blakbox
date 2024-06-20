@@ -208,7 +208,7 @@ const TicketForm = ({ getNewTicket, laneId, vendorId }: Props) => {
                 </FormItem>
               )}
             />
-            <h3>Add tags</h3>
+            <h3>Add tag</h3>
             <TagCreator
               vendorId={vendorId}
               getSelectedTags={setTags}

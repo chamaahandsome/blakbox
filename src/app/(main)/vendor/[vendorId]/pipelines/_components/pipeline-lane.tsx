@@ -179,7 +179,8 @@ const PipelineLane: React.FC<PipelaneLaneProps> = ({
                     type="ticket"
                   >
                     {(provided) => (
-                      <div className=" max-h-[700px] overflow-scroll pt-12 ">
+                      // <div className=" max-h-[700px] overflow-scroll pt-12 ">
+                        <div className=" max-h-[700px] overflow-auto pt-12 ">
                         <div
                           {...provided.droppableProps}
                           ref={provided.innerRef}
@@ -204,20 +205,6 @@ const PipelineLane: React.FC<PipelaneLaneProps> = ({
                   <DropdownMenuContent>
                     <DropdownMenuLabel>Options</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <AlertDialogTrigger>
-                      <DropdownMenuItem className="flex items-center gap-2">
-                        <Trash size={15} />
-                        Delete
-                      </DropdownMenuItem>
-                    </AlertDialogTrigger>
-
-                    <DropdownMenuItem
-                      className="flex items-center gap-2"
-                      onClick={handleEditLane}
-                    >
-                      <Edit size={15} />
-                      Edit
-                    </DropdownMenuItem>
                     <DropdownMenuItem
                       className="flex items-center gap-2"
                       onClick={handleCreateTicket}
@@ -225,15 +212,28 @@ const PipelineLane: React.FC<PipelaneLaneProps> = ({
                       <PlusCircleIcon size={15} />
                       Create Ticket
                     </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="flex items-center gap-2"
+                      onClick={handleEditLane}
+                    >
+                      <Edit size={15} />
+                      Edit
+                    </DropdownMenuItem>
+                    <AlertDialogTrigger>
+                      <DropdownMenuItem className="flex items-center gap-2">
+                        <Trash size={15} />
+                        Delete
+                      </DropdownMenuItem>
+                    </AlertDialogTrigger>
                   </DropdownMenuContent>
                 </div>
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>
-                      Are you absolutely sure?
+                      Are you sure?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete
+                      This action CANNOT BE UNDONE. This will permanently delete
                       your account and remove your data from our servers.
                     </AlertDialogDescription>
                   </AlertDialogHeader>

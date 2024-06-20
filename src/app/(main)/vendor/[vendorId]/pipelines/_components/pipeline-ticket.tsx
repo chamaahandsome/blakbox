@@ -238,12 +238,6 @@ const PipelineTicket = ({
                   <DropdownMenuContent>
                     <DropdownMenuLabel>Options</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <AlertDialogTrigger>
-                      <DropdownMenuItem className="flex items-center gap-2">
-                        <Trash size={15} />
-                        Delete Ticket
-                      </DropdownMenuItem>
-                    </AlertDialogTrigger>
                     <DropdownMenuItem
                       className="flex items-center gap-2"
                       onClick={handleClickEdit}
@@ -251,15 +245,21 @@ const PipelineTicket = ({
                       <Edit size={15} />
                       Edit Ticket
                     </DropdownMenuItem>
+                    <AlertDialogTrigger>
+                      <DropdownMenuItem className="flex items-center gap-2">
+                        <Trash size={15} />
+                        Delete Ticket
+                      </DropdownMenuItem>
+                    </AlertDialogTrigger>
                   </DropdownMenuContent>
                 </Card>
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>
-                      Are you absolutely sure?
+                      Are you sure?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete
+                      This action CANNOT BE UNDONE. This will permanently delete
                       the ticket and remove it from our servers.
                     </AlertDialogDescription>
                   </AlertDialogHeader>

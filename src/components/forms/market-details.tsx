@@ -431,10 +431,10 @@ const MarketDetails = ({data}: Props) => {
             <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle className="text-left">
-                Are you absolutely sure?
+                Are you sure?
               </AlertDialogTitle>
               <AlertDialogDescription className="text-left">
-                This action cannot be undone. This will permanently delete the
+                This action CANNOT BE UNDONE. This will permanently delete the
                 Market account and all related Vendors.
               </AlertDialogDescription>
             </AlertDialogHeader>
