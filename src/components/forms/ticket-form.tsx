@@ -264,7 +264,7 @@ const TicketForm = ({ getNewTicket, laneId, vendorId }: Props) => {
             </Select>
             <FormLabel>Customer</FormLabel>
             <Popover>
-              <PopoverTrigger
+            <PopoverTrigger
                 asChild
                 className="w-full"
               >

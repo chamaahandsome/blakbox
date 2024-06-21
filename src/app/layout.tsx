@@ -9,7 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 const font = DM_Sans ({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "BlakBox",
+  title: "econ",
   description: "Digitizing micro markets",
 };
 

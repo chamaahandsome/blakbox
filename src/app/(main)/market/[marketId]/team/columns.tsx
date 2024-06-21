@@ -205,7 +205,7 @@ const CellActions: React.FC<CellActionsProps> = ({ rowData }) => {
             }}
           >
             <Edit size={15} />
-            Edit Details
+            Edit & Give Access
           </DropdownMenuItem>
           {rowData.role !== 'MARKET_OWNER' && (
             <AlertDialogTrigger asChild>

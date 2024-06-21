@@ -287,7 +287,8 @@ const UserDetails = ({ id, type, vendors, userData }: Props) => {
                 <FormItem className="flex-1">
                   <FormLabel> User Role</FormLabel>
                   <Select
-                    disabled={field.value === 'MARKET_OWNER'}
+                    // disabled={field.value === 'MARKET_OWNER'}
+                    disabled={type === 'vendor' || field.value === 'MARKET_OWNER'}
                     onValueChange={(value) => {
                       if (
                         value === 'VENDOR_USER' ||

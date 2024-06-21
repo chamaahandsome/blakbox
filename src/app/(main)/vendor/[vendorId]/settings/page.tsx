@@ -13,6 +13,7 @@ type Props = {
 const VendorSettingPage = async ({ params }: Props) => {
   const authUser = await currentUser()
   if (!authUser) return
+
   const userDetails = await db.user.findUnique({
     where: {
       email: authUser.emailAddresses[0].emailAddress,
@@ -21,7 +22,9 @@ const VendorSettingPage = async ({ params }: Props) => {
   if (!userDetails) return
 
   const vendor = await db.vendor.findUnique({
-    where: { id: params.vendorId },
+    where: { 
+      id: params.vendorId 
+    },
   })
   if (!vendor) return
 

@@ -117,10 +117,16 @@ import {
     typeof _getTicketsWithAllRelations
   >
   
-//   export const ContactUserFormSchema = z.object({
-//     name: z.string().min(1, 'Required'),
-//     email: z.string().email(),
-//   })
+  export const ContactUserFormSchema = z.object({
+    name: z.string().min(1, 'Required'),
+    email: z.string().email(),
+  })
+
+  // export const ContactUserFormSchema = z.object({
+  //   name: z.string().min(1, "Name is required"),
+  //   email: z.string().email("Invalid email address"),
+  //   phone: z.string().min(10, "Invalid phone number"), // Example validation for a 10-digit number
+  // })
   
 //   export type Address = {
 //     city: string
