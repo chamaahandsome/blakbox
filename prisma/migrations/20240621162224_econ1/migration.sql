@@ -191,7 +191,6 @@ CREATE TABLE `Contact` (
     `updatedAt` DATETIME(3) NOT NULL,
     `vendorId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `Contact_email_key`(`email`),
     INDEX `Contact_vendorId_idx`(`vendorId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

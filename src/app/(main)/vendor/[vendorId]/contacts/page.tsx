@@ -1,3 +1,4 @@
+
 import BlurPage from '@/components/global/blur-page'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
@@ -11,10 +12,9 @@ import {
 } from '@/components/ui/table'
 import { db } from '@/lib/db'
 import { Contact, Vendor, Ticket } from '@prisma/client'
-// import format from 'date-fns/format'
+import { format } from 'date-fns'
 import React from 'react'
 import CraeteContactButton from './_components/create-contact-btn'
-import { format } from 'date-fns'
 
 type Props = {
   params: { vendorId: string }
@@ -29,7 +29,6 @@ const ContactPage = async ({ params }: Props) => {
     where: {
       id: params.vendorId,
     },
-
     include: {
       Contact: {
         include: {
@@ -62,6 +61,8 @@ const ContactPage = async ({ params }: Props) => {
 
     return amt.format(laneAmt)
   }
+
+
   return (
     <BlurPage>
       <h1 className="text-4xl p-4">Contacts</h1>
@@ -71,6 +72,7 @@ const ContactPage = async ({ params }: Props) => {
           <TableRow>
             <TableHead className="w-[200px]">Name</TableHead>
             <TableHead className="w-[300px]">Email</TableHead>
+            <TableHead className="w-[200px]">Phone</TableHead>
             <TableHead className="w-[200px]">Active</TableHead>
             <TableHead>Created Date</TableHead>
             <TableHead className="text-right">Total Value</TableHead>
@@ -80,14 +82,18 @@ const ContactPage = async ({ params }: Props) => {
           {allContacts.map((contact) => (
             <TableRow key={contact.id}>
               <TableCell>
-                <Avatar>
-                  <AvatarImage alt="@shadcn" />
-                  <AvatarFallback className="bg-primary text-white">
-                    {contact.name.slice(0, 2).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
+              <div className="flex items-center space-x-2">
+                  <Avatar>
+                    <AvatarImage alt={contact.name} />
+                    <AvatarFallback className="bg-primary text-white">
+                      {contact.name.slice(0, 2).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span>{contact.name.split(' ')[0]}</span> {/* Display first name */}
+                </div>
               </TableCell>
               <TableCell>{contact.email}</TableCell>
+              <TableCell>{contact.phone || 'N/A'}</TableCell>
               <TableCell>
                 {formatTotal(contact.Ticket) === '$0.00' ? (
                   <Badge variant={'destructive'}>Inactive</Badge>
@@ -109,6 +115,11 @@ const ContactPage = async ({ params }: Props) => {
 
 export default ContactPage
 
+
+
+
+
+
 // import BlurPage from '@/components/global/blur-page'
 // import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 // import { Badge } from '@/components/ui/badge'
@@ -122,9 +133,10 @@ export default ContactPage
 // } from '@/components/ui/table'
 // import { db } from '@/lib/db'
 // import { Contact, Vendor, Ticket } from '@prisma/client'
-// import { format } from 'date-fns'
+// // import format from 'date-fns/format'
 // import React from 'react'
 // import CraeteContactButton from './_components/create-contact-btn'
+// import { format } from 'date-fns'
 
 // type Props = {
 //   params: { vendorId: string }
@@ -139,6 +151,7 @@ export default ContactPage
 //     where: {
 //       id: params.vendorId,
 //     },
+
 //     include: {
 //       Contact: {
 //         include: {
@@ -171,7 +184,6 @@ export default ContactPage
 
 //     return amt.format(laneAmt)
 //   }
-
 //   return (
 //     <BlurPage>
 //       <h1 className="text-4xl p-4">Contacts</h1>
@@ -181,7 +193,6 @@ export default ContactPage
 //           <TableRow>
 //             <TableHead className="w-[200px]">Name</TableHead>
 //             <TableHead className="w-[300px]">Email</TableHead>
-//             <TableHead className="w-[200px]">Phone</TableHead>
 //             <TableHead className="w-[200px]">Active</TableHead>
 //             <TableHead>Created Date</TableHead>
 //             <TableHead className="text-right">Total Value</TableHead>
@@ -191,18 +202,14 @@ export default ContactPage
 //           {allContacts.map((contact) => (
 //             <TableRow key={contact.id}>
 //               <TableCell>
-//               <div className="flex items-center space-x-2">
-//                   <Avatar>
-//                     <AvatarImage alt={contact.name} />
-//                     <AvatarFallback className="bg-primary text-white">
-//                       {contact.name.slice(0, 2).toUpperCase()}
-//                     </AvatarFallback>
-//                   </Avatar>
-//                   <span>{contact.name.split(' ')[0]}</span> {/* Display first name */}
-//                 </div>
+//                 <Avatar>
+//                   <AvatarImage alt="@shadcn" />
+//                   <AvatarFallback className="bg-primary text-white">
+//                     {contact.name.slice(0, 2).toUpperCase()}
+//                   </AvatarFallback>
+//                 </Avatar>
 //               </TableCell>
 //               <TableCell>{contact.email}</TableCell>
-//               <TableCell>{contact.phone || 'N/A'}</TableCell>
 //               <TableCell>
 //                 {formatTotal(contact.Ticket) === '$0.00' ? (
 //                   <Badge variant={'destructive'}>Inactive</Badge>
