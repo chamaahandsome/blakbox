@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { db } from '@/lib/db'
-// import { stripe } from '@/lib/stripe'
+import { stripe } from '@/lib/stripe'
 import { getStripeOAuthLink } from '@/lib/utils'
 import { CheckCircleIcon } from 'lucide-react'
 import Image from 'next/image'
@@ -17,8 +17,8 @@ import React from 'react'
 
 type Props = {
   searchParams: {
-    state: string
-    code: string
+    state: string;
+    code: string;
   }
   params: { vendorId: string }
 }
@@ -49,25 +49,25 @@ const LaunchPad = async ({ params, searchParams }: Props) => {
     `launchpad___${vendorDetails.id}`
   )
 
-//   let connectedStripeAccount = false
+  let connectedStripeAccount = false
 
-//   if (searchParams.code) {
-//     if (!vendorDetails.connectAccountId) {
-//       try {
-//         const response = await stripe.oauth.token({
-//           grant_type: 'authorization_code',
-//           code: searchParams.code,
-//         })
-//         await db.vendor.update({
-//           where: { id: params.vendorId },
-//           data: { connectAccountId: response.stripe_user_id },
-//         })
-//         connectedStripeAccount = true
-//       } catch (error) {
-//         console.log('🔴 Could not connect stripe account', error)
-//       }
-//     }
-//   }
+  if (searchParams.code) {
+    if (!vendorDetails.connectAccountId) {
+      try {
+        const response = await stripe.oauth.token({
+          grant_type: 'authorization_code',
+          code: searchParams.code,
+        })
+        await db.vendor.update({
+          where: { id: params.vendorId },
+          data: { connectAccountId: response.stripe_user_id },
+        })
+        connectedStripeAccount = true
+      } catch (error) {
+        console.log('🔴 Could not connect stripe account', error)
+      }
+    }
+  }
 
   return (
     <BlurPage>
@@ -108,7 +108,7 @@ const LaunchPad = async ({ params, searchParams }: Props) => {
                     used to run payouts.
                   </p>
                 </div>
-                {/* {vendorDetails.connectAccountId ||
+                {vendorDetails.connectAccountId ||
                 connectedStripeAccount ? (
                   <CheckCircleIcon
                     size={50}
@@ -121,7 +121,7 @@ const LaunchPad = async ({ params, searchParams }: Props) => {
                   >
                     Start
                   </Link>
-                )} */}
+                )}
               </div>
               <div className="flex justify-between items-center w-full h-20 border p-4 rounded-lg">
                 <div className="flex items-center gap-4">

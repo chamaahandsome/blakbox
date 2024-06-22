@@ -88,7 +88,7 @@ export async function POST(req: Request) {
     //@ts-ignore
     return NextResponse.json({ error: error.message })
   }
-}
+};
 
 export async function OPTIONS(request: Request) {
   const allowedOrigin = request.headers.get('origin')
@@ -104,4 +104,4 @@ export async function OPTIONS(request: Request) {
   })
 
   return response
-}
+};

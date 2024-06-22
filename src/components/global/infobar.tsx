@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '../ui/sheet'
-import { Bell } from 'lucide-react'
+import { BellRing } from 'lucide-react'
 import { Role } from '@prisma/client'
 import { Card } from '../ui/card'
 import { Switch } from '../ui/switch'
@@ -55,8 +55,8 @@ const InfoBar = ({ notifications, vendorId, className, role }: Props) => {
           <UserButton afterSignOutUrl="/" />
           <Sheet>
             <SheetTrigger>
-              <div className="rounded-full w-9 h-9 bg-primary flex items-center justify-center text-white">
-                <Bell size={17} />
+              <div className="rounded-full w-7 h-7 bg-primary flex items-center justify-center text-white">
+                <BellRing size={17} />
               </div>
             </SheetTrigger>
             <SheetContent className="mt-4 mr-4 pr-4 overflow-auto">

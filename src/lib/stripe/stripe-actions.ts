@@ -17,7 +17,7 @@ export const subscriptionCreated = async (
       },
     })
     if (!market) {
-      throw new Error('Could not find and market to upsert the subscription')
+      throw new Error('Could not find the market to upsert the subscription')
     }
 
     const data = {
@@ -27,7 +27,7 @@ export const subscriptionCreated = async (
       currentPeriodEndDate: new Date(subscription.current_period_end * 1000),
       //@ts-ignore
       priceId: subscription.plan.id,
-      subscritiptionId: subscription.id,
+      subscriptionId: subscription.id,
       //@ts-ignore
       plan: subscription.plan.id,
     }
@@ -43,7 +43,7 @@ export const subscriptionCreated = async (
   } catch (error) {
     console.log('🔴 Error from Create action', error)
   }
-}
+};
 
 export const getConnectAccountProducts = async (stripeAccount: string) => {
   const products = await stripe.products.list(
@@ -56,4 +56,4 @@ export const getConnectAccountProducts = async (stripeAccount: string) => {
     }
   )
   return products.data
-}
+};

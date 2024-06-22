@@ -418,7 +418,7 @@ model Subscription {
   priceId              String
   customerId           String
   currentPeriodEndDate DateTime
-  subscritiptionId     String   @unique
+  subscriptionId     String   @unique
 
   marketId             String?  @unique
   Market               Market?  @relation(fields: [marketId], references: [id])

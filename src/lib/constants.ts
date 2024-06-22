@@ -32,7 +32,7 @@ import Warning from '@/components/icons/warning'
 export const pricingCards = [
     {
       title: 'Starter',
-      description: 'Perfect for trying out Blakbox',
+      description: 'Perfect for trying out the ECON market',
       price: 'Free',
       duration: '',
       highlight: 'Key features',
@@ -41,7 +41,7 @@ export const pricingCards = [
     },
     {
       title: 'Unlimited',
-      description: 'The ultimate markey kit',
+      description: 'The ultimate market kit',
       price: '$499',
       duration: 'month',
       highlight: 'Key features',

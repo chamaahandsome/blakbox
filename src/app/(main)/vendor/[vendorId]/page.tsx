@@ -21,7 +21,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { db } from '@/lib/db'
-// import { stripe } from '@/lib/stripe'
+import { stripe } from '@/lib/stripe'
 import { AreaChart, BadgeDelta } from '@tremor/react'
 import { ClipboardIcon, Contact2, DollarSign, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
@@ -32,7 +32,7 @@ type Props = {
   searchParams: {
     code: string
   }
-}
+};
 
 const VendorPageId = async ({ params, searchParams }: Props) => {
   let currency = 'USD'
@@ -55,54 +55,54 @@ const VendorPageId = async ({ params, searchParams }: Props) => {
 
   if (!vendorDetails) return
 
-  // if (vendorDetails.connectAccountId) {
-  //   const response = await stripe.accounts.retrieve({
-  //     stripeAccount: vendorDetails.connectAccountId,
-  //   })
-  //   currency = response.default_currency?.toUpperCase() || 'USD'
-  //   const checkoutSessions = await stripe.checkout.sessions.list(
-  //     { created: { gte: startDate, lte: endDate }, limit: 100 },
-  //     {
-  //       stripeAccount: vendorDetails.connectAccountId,
-  //     }
-  //   )
-  //   sessions = checkoutSessions.data.map((session) => ({
-  //     ...session,
-  //     created: new Date(session.created).toLocaleDateString(),
-  //     amount_total: session.amount_total ? session.amount_total / 100 : 0,
-  //   }))
+  if (vendorDetails.connectAccountId) {
+    const response = await stripe.accounts.retrieve({
+      stripeAccount: vendorDetails.connectAccountId,
+    })
+    currency = response.default_currency?.toUpperCase() || 'USD'
+    const checkoutSessions = await stripe.checkout.sessions.list(
+      { created: { gte: startDate, lte: endDate }, limit: 100 },
+      {
+        stripeAccount: vendorDetails.connectAccountId,
+      }
+    )
+    sessions = checkoutSessions.data.map((session) => ({
+      ...session,
+      created: new Date(session.created).toLocaleDateString(),
+      amount_total: session.amount_total ? session.amount_total / 100 : 0,
+    }))
 
-  //   totalClosedSessions = checkoutSessions.data
-  //     .filter((session) => session.status === 'complete')
-  //     .map((session) => ({
-  //       ...session,
-  //       created: new Date(session.created).toLocaleDateString(),
-  //       amount_total: session.amount_total ? session.amount_total / 100 : 0,
-  //     }))
+    totalClosedSessions = checkoutSessions.data
+      .filter((session) => session.status === 'complete')
+      .map((session) => ({
+        ...session,
+        created: new Date(session.created).toLocaleDateString(),
+        amount_total: session.amount_total ? session.amount_total / 100 : 0,
+      }))
 
-  //   totalPendingSessions = checkoutSessions.data
-  //     .filter(
-  //       (session) => session.status === 'open' || session.status === 'expired'
-  //     )
-  //     .map((session) => ({
-  //       ...session,
-  //       created: new Date(session.created).toLocaleDateString(),
-  //       amount_total: session.amount_total ? session.amount_total / 100 : 0,
-  //     }))
+    totalPendingSessions = checkoutSessions.data
+      .filter(
+        (session) => session.status === 'open' || session.status === 'expired'
+      )
+      .map((session) => ({
+        ...session,
+        created: new Date(session.created).toLocaleDateString(),
+        amount_total: session.amount_total ? session.amount_total / 100 : 0,
+      }))
 
-  //   net = +totalClosedSessions
-  //     .reduce((total, session) => total + (session.amount_total || 0), 0)
-  //     .toFixed(2)
+    net = +totalClosedSessions
+      .reduce((total, session) => total + (session.amount_total || 0), 0)
+      .toFixed(2)
 
-  //   potentialIncome = +totalPendingSessions
-  //     .reduce((total, session) => total + (session.amount_total || 0), 0)
-  //     .toFixed(2)
+    potentialIncome = +totalPendingSessions
+      .reduce((total, session) => total + (session.amount_total || 0), 0)
+      .toFixed(2)
 
-  //   closingRate = +(
-  //     (totalClosedSessions.length / checkoutSessions.data.length) *
-  //     100
-  //   ).toFixed(2)
-  // }
+    closingRate = +(
+      (totalClosedSessions.length / checkoutSessions.data.length) *
+      100
+    ).toFixed(2)
+  }
 
   const funnels = await db.funnel.findMany({
     where: {
