@@ -40,13 +40,13 @@ export const pricingCards = [
       priceId: '',
     },
     {
-      title: 'Unlimited Saas',
+      title: 'Unlimited',
       description: 'The ultimate markey kit',
       price: '$499',
       duration: 'month',
       highlight: 'Key features',
       features: ['Rebilling', '24/7 Support team'],
-      priceId: 'price_1OYxkqFj9oKEERu1KfJGWxgN',
+      priceId: 'price_1PUGw9Lt6H8Yq3I8sBIxtYJD',
     },
     {
       title: 'Basic',
@@ -55,8 +55,12 @@ export const pricingCards = [
       duration: 'month',
       highlight: 'Everything in Starter, plus',
       features: ['Unlimited Vendorss', 'Unlimited Team members'],
-      priceId: 'price_1OYxkqFj9oKEERu1NbKUxXxN',
+      priceId: 'price_1PUGufLt6H8Yq3I8wJYVXEyR',
     },
+  ]
+
+  export const addOnProducts = [
+    { title: 'Priority Support', id: 'prod_QKxpvFC97KPsus' },
   ]
 
 

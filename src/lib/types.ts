@@ -19,6 +19,7 @@ import {
   } from './queries'
   import { db } from './db'
   import { z } from 'zod'
+import Stripe from 'stripe'
 
 
   
@@ -128,27 +129,27 @@ import {
     phone: z.string().min(10, "Invalid phone number"), // Example validation for a 10-digit number
   })
   
-//   export type Address = {
-//     city: string
-//     country: string
-//     line1: string
-//     postal_code: string
-//     state: string
-//   }
+  export type Address = {
+    city: string
+    country: string
+    line1: string
+    postal_code: string
+    state: string
+  }
   
-//   export type ShippingInfo = {
-//     address: Address
-//     name: string
-//   }
+  export type ShippingInfo = {
+    address: Address
+    name: string
+  }
   
-//   export type StripeCustomerType = {
-//     email: string
-//     name: string
-//     shipping: ShippingInfo
-//     address: Address
-//   }
+  export type StripeCustomerType = {
+    email: string
+    name: string
+    shipping: ShippingInfo
+    address: Address
+  }
   
-//   export type PricesList = Stripe.ApiList<Stripe.Price>
+  export type PricesList = Stripe.ApiList<Stripe.Price>
   
 //   export type FunnelsForVendor = Prisma.PromiseReturnType<
 //     typeof getFunnels

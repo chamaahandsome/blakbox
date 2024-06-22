@@ -42,10 +42,10 @@ const Home = () => {
             // WIP Wire Up free product from Stripe
             <Card 
                 key={card.title} 
-                className={clsx('w-[300px] flex flex-col justify-between mb-10', {'border-2 border-primary': card.title === "Unlimited Saas",})}
+                className={clsx('w-[300px] flex flex-col justify-between mb-10', {'border-2 border-primary': card.title === "Unlimited",})}
             >
               <CardHeader >
-                <CardTitle className={clsx('', {'text-muted-foreground': card.title !== 'Unlimited Saas',})}>
+                <CardTitle className={clsx('', {'text-muted-foreground': card.title !== 'Unlimited',})}>
                   {card.title}
                   </CardTitle>
                 <CardDescription>{card.description}</CardDescription>
@@ -66,7 +66,7 @@ const Home = () => {
                   ))}
                 </div>
                 <Link href={`/market?plan=${card.priceId}`} 
-                      className={clsx('w-full text-center bg-primary p-2 rounded-md', {'!bg-muted-foreground': card.title !== "Unlimited Saas"})}
+                      className={clsx('w-full text-center bg-primary p-2 rounded-md', {'!bg-muted-foreground': card.title !== "Unlimited"})}
                 >
                   Lets Get It
                 </Link>

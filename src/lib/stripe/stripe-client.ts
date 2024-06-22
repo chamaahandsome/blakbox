@@ -9,4 +9,4 @@ export const getStripe = (connectedAccountId?: string) => {
     )
   }
   return stripePromise
-}
+};

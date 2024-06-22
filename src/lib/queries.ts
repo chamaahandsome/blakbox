@@ -1,6 +1,5 @@
 'use server';
 
-// import { clerkClient, currentUser } from '@clerk/nextjs'
 import { db } from './db'
 import { redirect } from 'next/navigation'
 import {

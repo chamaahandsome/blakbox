@@ -1,84 +1,76 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { headers } from 'next/headers'
-import Stripe from 'stripe'
+import { db } from '@/lib/db'
 import { stripe } from '@/lib/stripe'
-import { subscriptionCreated } from '@/lib/stripe/stripe-actions'
+import { NextResponse } from 'next/server'
 
-const stripeWebhookEvents = new Set([
-  'product.created',
-  'product.updated',
-  'price.created',
-  'price.updated',
-  'checkout.session.completed',
-  'customer.subscription.created',
-  'customer.subscription.updated',
-  'customer.subscription.deleted',
-])
+export async function POST(req: Request) {
+  const { customerId, priceId } = await req.json()
+  if (!customerId || !priceId)
+    return new NextResponse('Customer Id or price id is missing', {
+      status: 400,
+    })
 
-export async function POST(req: NextRequest) {
-  let stripeEvent: Stripe.Event
-  const body = await req.text()
-  const sig = headers().get('Stripe-Signature')
-  const webhookSecret =
-    process.env.STRIPE_WEBHOOK_SECRET_LIVE ?? process.env.STRIPE_WEBHOOK_SECRET
+  const subscriptionExists = await db.market.findFirst({
+    where: { customerId },
+    include: { Subscription: true },
+  })
+
   try {
-    if (!sig || !webhookSecret) {
-      console.log(
-        '🔴 Error Stripe webhook secret or the signature does not exist.'
-      )
-      return
-    }
-    stripeEvent = stripe.webhooks.constructEvent(body, sig, webhookSecret)
-  } catch (error: any) {
-    console.log(`🔴 Error ${error.message}`)
-    return new NextResponse(`Webhook Error: ${error.message}`, { status: 400 })
-  }
-
-  //
-  try {
-    if (stripeWebhookEvents.has(stripeEvent.type)) {
-      const subscription = stripeEvent.data.object as Stripe.Subscription
-      if (
-        !subscription.metadata.connectAccountPayments &&
-        !subscription.metadata.connectAccountSubscriptions
-      ) {
-        switch (stripeEvent.type) {
-          case 'customer.subscription.created':
-          case 'customer.subscription.updated': {
-            if (subscription.status === 'active') {
-              await subscriptionCreated(
-                subscription,
-                subscription.customer as string
-              )
-              console.log('CREATED FROM WEBHOOK 💳', subscription)
-            } else {
-              console.log(
-                'SKIPPED AT CREATED FROM WEBHOOK 💳 because subscription status is not active',
-                subscription
-              )
-              break
-            }
-          }
-          default:
-            console.log('👉🏻 Unhandled relevant event!', stripeEvent.type)
-        }
-      } else {
-        console.log(
-          'SKIPPED FROM WEBHOOK 💳 because subscription was from a connected account not for the application',
-          subscription
+    if (
+      subscriptionExists?.Subscription?.subscritiptionId &&
+      subscriptionExists.Subscription.active
+    ) {
+      //update the subscription instead of creating one.
+      if (!subscriptionExists.Subscription.subscritiptionId) {
+        throw new Error(
+          'Could not find the subscription Id to update the subscription.'
         )
       }
+      console.log('Updating the subscription')
+      const currentSubscriptionDetails = await stripe.subscriptions.retrieve(
+        subscriptionExists.Subscription.subscritiptionId
+      )
+
+      const subscription = await stripe.subscriptions.update(
+        subscriptionExists.Subscription.subscritiptionId,
+        {
+          items: [
+            {
+              id: currentSubscriptionDetails.items.data[0].id,
+              deleted: true,
+            },
+            { price: priceId },
+          ],
+          expand: ['latest_invoice.payment_intent'],
+        }
+      )
+      return NextResponse.json({
+        subscriptionId: subscription.id,
+        //@ts-ignore
+        clientSecret: subscription.latest_invoice.payment_intent.client_secret,
+      })
+    } else {
+      console.log('Createing a sub')
+      const subscription = await stripe.subscriptions.create({
+        customer: customerId,
+        items: [
+          {
+            price: priceId,
+          },
+        ],
+        payment_behavior: 'default_incomplete',
+        payment_settings: { save_default_payment_method: 'on_subscription' },
+        expand: ['latest_invoice.payment_intent'],
+      })
+      return NextResponse.json({
+        subscriptionId: subscription.id,
+        //@ts-ignore
+        clientSecret: subscription.latest_invoice.payment_intent.client_secret,
+      })
     }
   } catch (error) {
-    console.log(error)
-    return new NextResponse('🔴 Webhook Error', { status: 400 })
+    console.log('🔴 Error', error)
+    return new NextResponse('Internal Server Error', {
+      status: 500,
+    })
   }
-  return NextResponse.json(
-    {
-      webhookActionReceived: true,
-    },
-    {
-      status: 200,
-    }
-  )
 }

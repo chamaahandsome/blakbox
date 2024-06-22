@@ -14,7 +14,7 @@ export type ModalData = {
   contact?: Contact
   plans?: {
     defaultPriceId: Plan
-    // plans: PricesList['data']
+    plans: PricesList['data']
   }
 }
 type ModalContextType = {

@@ -1,57 +1,74 @@
 'use client'
-
 import { Market } from '@prisma/client'
-import React, { use, useEffect, useState } from 'react'
-import { useToast } from '../ui/use-toast'
-import { useRouter } from 'next/navigation'
-import { AlertDialog } from '@radix-ui/react-alert-dialog'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { useForm } from 'react-hook-form'
-
+import React, { useEffect, useState } from 'react'
 import { NumberInput } from '@tremor/react'
+import { v4 } from 'uuid'
+
+import { useRouter } from 'next/navigation'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '../ui/alert-dialog'
+import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../ui/form'
+import { useToast } from '../ui/use-toast'
 
 import * as z from 'zod'
 import FileUpload from '../global/file-upload'
 import { Input } from '../ui/input'
 import { Switch } from '../ui/switch'
+import {
+  deleteMarket,
+  initUser,
+  saveActivityLogsNotification,
+  updateMarketDetails,
+  upsertMarket,
+} from '@/lib/queries'
 import { Button } from '../ui/button'
-import { deleteMarket, initUser, saveActivityLogsNotification, updateMarketDetails, upsertMarket } from '@/lib/queries'
 import Loading from '../global/loading'
-import { 
-  AlertDialogAction, 
-  AlertDialogCancel, 
-  AlertDialogContent, 
-  AlertDialogDescription, 
-  AlertDialogFooter, 
-  AlertDialogHeader, 
-  AlertDialogTitle, 
-  AlertDialogTrigger 
-} from '../ui/alert-dialog'
-import { v4 } from 'uuid'
-
 
 type Props = {
   data?: Partial<Market>
 }
 
 const FormSchema = z.object({
-  name: z.string().min(3, { message: 'Market name must be atleast 3 characters.' }),
-  companyEmail: z.string().min(5),
-  companyPhone: z.string().min(10),
+  name: z.string().min(2, { message: 'Market name must be atleast 2 chars.' }),
+  companyEmail: z.string().min(1),
+  companyPhone: z.string().min(1),
   whiteLabel: z.boolean(),
-  address: z.string().min(2),
-  city: z.string().min(2),
-  zipCode: z.string().min(3),
-  state: z.string().min(2),
-  country: z.string().min(2),
+  address: z.string().min(1),
+  city: z.string().min(1),
+  zipCode: z.string().min(1),
+  state: z.string().min(1),
+  country: z.string().min(1),
   marketLogo: z.string().min(1),
 })
 
-const MarketDetails = ({data}: Props) => {
-
-  const {toast} = useToast()
+const MarketDetails = ({ data }: Props) => {
+  const { toast } = useToast()
   const router = useRouter()
   const [deletingMarket, setDeletingMarket] = useState(false)
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -105,23 +122,24 @@ const MarketDetails = ({data}: Props) => {
           },
         }
 
-        // const customerResponse = await fetch('/api/stripe/create-customer', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(bodyData),
-        // })
-        // const customerData: { customerId: string } =
-        //   await customerResponse.json()
-        // custId = customerData.customerId
+        const customerResponse = await fetch('/api/stripe/create-customer', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bodyData),
+        })
+        const customerData: { customerId: string } =
+          await customerResponse.json()
+        custId = customerData.customerId
       }
 
       newUserData = await initUser({ role: 'MARKET_OWNER' })
-      if (!data?.id) {
+      if (!data?.customerId && !custId) return
 
-     await upsertMarket({
+      const response = await upsertMarket({
         id: data?.id ? data.id : v4(),
+        customerId: data?.customerId || custId || '',
         address: values.address,
         marketLogo: values.marketLogo,
         city: values.city,
@@ -137,40 +155,39 @@ const MarketDetails = ({data}: Props) => {
         connectAccountId: '',
         goal: 5,
       })
-    }
       toast({
         title: 'Created Market',
       })
-       return router.refresh()
-
+      if (data?.id) return router.refresh()
+      if (response) {
+        return router.refresh()
+      }
     } catch (error) {
       console.log(error)
       toast({
         variant: 'destructive',
-        title: 'Sorry!',
+        title: 'Oppse!',
         description: 'could not create your market',
       })
     }
   }
-  
   const handleDeleteMarket = async () => {
-    if(!data?.id) return
+    if (!data?.id) return
     setDeletingMarket(true)
-    // discontinue the subscription for the user/market
-
-    try{
+    //WIP: discontinue the subscription
+    try {
       const response = await deleteMarket(data.id)
       toast({
-        title: 'Market Deleted',
-        description: 'Market and ALL your Vendors have been deleted successfully',
+        title: 'Deleted Market',
+        description: 'Deleted your market and all vendors',
       })
       router.refresh()
     } catch (error) {
       console.log(error)
       toast({
-        variant: "destructive",
-        title: 'Sorry!',
-        description: 'Could not delete you Market',
+        variant: 'destructive',
+        title: 'Oppse!',
+        description: 'could not delete your market ',
       })
     }
     setDeletingMarket(false)
@@ -178,15 +195,16 @@ const MarketDetails = ({data}: Props) => {
 
   return (
     <AlertDialog>
-      <Card className='w-full'>
+      <Card className="w-full">
         <CardHeader>
-          <CardTitle>Market/Convention Information</CardTitle>
+          <CardTitle>Market Information</CardTitle>
           <CardDescription>
-            Lets create you market. You can edit your market settings later from the market settings tab.
+            Lets create an market for you business. You can edit market settings
+            later from the market settings tab.
           </CardDescription>
         </CardHeader>
         <CardContent>
-        <Form {...form}>
+          <Form {...form}>
             <form
               onSubmit={form.handleSubmit(handleSubmit)}
               className="space-y-4"
@@ -197,7 +215,7 @@ const MarketDetails = ({data}: Props) => {
                 name="marketLogo"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Market/Convention Logo</FormLabel>
+                    <FormLabel>Market Logo</FormLabel>
                     <FormControl>
                       <FileUpload
                         apiEndpoint="marketLogo"
@@ -236,7 +254,7 @@ const MarketDetails = ({data}: Props) => {
                       <FormControl>
                         <Input
                           readOnly
-                          placeholder="veryepic@con.com"
+                          placeholder="Email"
                           {...field}
                         />
                       </FormControl>
@@ -255,7 +273,7 @@ const MarketDetails = ({data}: Props) => {
                       <FormLabel>Market Phone Number</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="123-456-7890"
+                          placeholder="Phone"
                           {...field}
                         />
                       </FormControl>
@@ -275,9 +293,9 @@ const MarketDetails = ({data}: Props) => {
                       <div>
                         <FormLabel>Whitelabel Market</FormLabel>
                         <FormDescription>
-                          Turning on whilelabel mode will show your market/convention logo
-                          to all Vendors by default. You can overwrite this
-                          functionality through Vendor settings.
+                          Turning on whilelabel mode will show your market logo
+                          to all sub accounts by default. You can overwrite this
+                          functionality through sub account settings.
                         </FormDescription>
                       </div>
 
@@ -335,7 +353,7 @@ const MarketDetails = ({data}: Props) => {
                       <FormLabel>State</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="CA"
+                          placeholder="State"
                           {...field}
                         />
                       </FormControl>
@@ -352,7 +370,7 @@ const MarketDetails = ({data}: Props) => {
                       <FormLabel>Postal Code</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Postal code"
+                          placeholder="Postal Code"
                           {...field}
                         />
                       </FormControl>
@@ -380,9 +398,9 @@ const MarketDetails = ({data}: Props) => {
               />
               {data?.id && (
                 <div className="flex flex-col gap-2">
-                  <FormLabel>Create Your Goal</FormLabel>
+                  <FormLabel>Create A Goal</FormLabel>
                   <FormDescription>
-                    ✨ Create a goal for your market/convention. As your business grows
+                    ✨ Create a goal for your market. As your business grows
                     your goals grow too so dont forget to set the bar higher!
                   </FormDescription>
                   <NumberInput
@@ -392,14 +410,14 @@ const MarketDetails = ({data}: Props) => {
                       await updateMarketDetails(data.id, { goal: val })
                       await saveActivityLogsNotification({
                         marketId: data.id,
-                        description: `Updated your market goal to | ${val} Vendor`,
+                        description: `Updated the market goal to | ${val} Vendors`,
                         vendorId: undefined,
                       })
                       router.refresh()
                     }}
                     min={1}
                     className="bg-background !border !border-input"
-                    placeholder="Vendor Goal"
+                    placeholder="Vendors Goal"
                   />
                 </div>
               )}
@@ -411,6 +429,7 @@ const MarketDetails = ({data}: Props) => {
               </Button>
             </form>
           </Form>
+
           {data?.id && (
             <div className="flex flex-row items-center justify-between rounded-lg border border-destructive gap-4 p-4 mt-4">
               <div>
@@ -418,7 +437,7 @@ const MarketDetails = ({data}: Props) => {
               </div>
               <div className="text-muted-foreground">
                 Deleting your market CANNOT BE UNDONE. This will also delete all
-                Vendors and all data related to your Vendors. Vendors will no longer have access to funnels, contacts etc.
+                vendors and all data related to your vendors. Vendorss will no longer have access to funnels, contacts etc.
               </div>
               <AlertDialogTrigger
                 disabled={isLoading || deletingMarket}
@@ -428,14 +447,14 @@ const MarketDetails = ({data}: Props) => {
               </AlertDialogTrigger>
             </div>
           )}
-            <AlertDialogContent>
+          <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle className="text-left">
                 Are you sure?
               </AlertDialogTitle>
               <AlertDialogDescription className="text-left">
                 This action CANNOT BE UNDONE. This will permanently delete the
-                Market account and all related Vendors.
+                Market account and all related sub accounts.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter className="flex items-center">
@@ -455,4 +474,4 @@ const MarketDetails = ({data}: Props) => {
   )
 }
 
-export default MarketDetails;
+export default MarketDetails
