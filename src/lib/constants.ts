@@ -57,11 +57,11 @@ export const pricingCards = [
       features: ['Unlimited Vendorss', 'Unlimited Team members'],
       priceId: 'price_1PUGufLt6H8Yq3I8wJYVXEyR',
     },
-  ]
+  ];
 
   export const addOnProducts = [
     { title: 'Priority Support', id: 'prod_QKxpvFC97KPsus' },
-  ]
+  ];
 
 
   export const icons = [
@@ -210,4 +210,4 @@ export const pricingCards = [
       label: 'Clipboard Icon',
       path: ClipboardIcon,
     },
-  ]
+  ];

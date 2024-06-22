@@ -16,7 +16,8 @@ export type ModalData = {
     defaultPriceId: Plan
     plans: PricesList['data']
   }
-}
+};
+
 type ModalContextType = {
   data: ModalData
   isOpen: boolean
@@ -67,7 +68,7 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
       {showingModal}
     </ModalContext.Provider>
   )
-}
+};
 
 export const useModal = () => {
   const context = useContext(ModalContext)
@@ -75,6 +76,6 @@ export const useModal = () => {
     throw new Error('useModal must be used within the modal provider')
   }
   return context
-}
+};
 
-export default ModalProvider
+export default ModalProvider;

@@ -127,7 +127,7 @@ export const reducer = (state: State, action: Action): State => {
         toasts: state.toasts.filter((t) => t.id !== action.toastId),
       }
   }
-}
+};
 
 const listeners: Array<(state: State) => void> = []
 
@@ -138,7 +138,7 @@ function dispatch(action: Action) {
   listeners.forEach((listener) => {
     listener(memoryState)
   })
-}
+};
 
 type Toast = Omit<ToasterToast, "id">
 
@@ -191,4 +191,4 @@ function useToast() {
   }
 }
 
-export { useToast, toast }
+export { useToast, toast };

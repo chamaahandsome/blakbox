@@ -18,4 +18,4 @@ const Unauthorized = (props: Props) => {
   )
 }
 
-export default Unauthorized
+export default Unauthorized;

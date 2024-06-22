@@ -138,14 +138,14 @@ export const saveActivityLogsNotification = async ({
             }
         })
     }
-}
+};
 
 export const createTeamUser = async (marketId: string, user:User) => {
     if(user.role === 'MARKET_OWNER') return null
     const response = await db.user.create({data: {...user}})
 
     return response
-}
+};
 
 export const verifyAndAcceptInvitation = async () => {
     const user = await currentUser()
@@ -199,7 +199,7 @@ export const verifyAndAcceptInvitation = async () => {
         return market ? market.marketId : null
 
      }
-}
+};
 
 export const updateMarketDetails = async (
     marketId: string,
@@ -210,14 +210,14 @@ export const updateMarketDetails = async (
       data: { ...marketDetails },
     })
     return response
-  }
+  };
 
   export const deleteMarket = async (marketId: string) => {
     const response = await db.market.delete({
       where: { id: marketId },
     })
     return response
-  }
+  };
 
   export const initUser = async (newUser: Partial<User>) => {
     const user = await currentUser()
@@ -244,7 +244,7 @@ export const updateMarketDetails = async (
     })
   
     return userData
-  }
+  };
 
   export const upsertMarket = async (market: Market, price?: Plan) => {
     if (!market.companyEmail) return null
@@ -299,7 +299,7 @@ export const updateMarketDetails = async (
     } catch (error) {
       console.log(error)
     }
-  }
+  };
 
 
   export const getNotificationAndUser = async (marketId: string) => {
@@ -315,7 +315,7 @@ export const updateMarketDetails = async (
     } catch (error) {
       console.log(error)
     }
-  }
+  };
 
   export const upsertVendor = async (vendor: Vendor) => {
     if (!vendor.companyEmail) return null
@@ -395,7 +395,7 @@ export const updateMarketDetails = async (
       },
     })
     return response
-  }
+  };
 
   export const getUserPermissions = async (userId: string) => {
     const response = await db.user.findUnique({
@@ -404,7 +404,7 @@ export const updateMarketDetails = async (
     })
   
     return response
-  }
+  };
 
   export const updateUser = async (user: Partial<User>) => {
     const response = await db.user.update({
@@ -419,7 +419,7 @@ export const updateMarketDetails = async (
     })
   
     return response
-  }
+  };
   
   export const changeUserPermissions = async (
     permissionId: string | undefined,
@@ -441,7 +441,7 @@ export const updateMarketDetails = async (
     } catch (error) {
       console.log('🔴Could not change persmission', error)
     }
-  }
+  };
   
   export const getVendorDetails = async (vendorId: string) => {
     const response = await db.vendor.findUnique({
@@ -450,7 +450,7 @@ export const updateMarketDetails = async (
       },
     })
     return response
-  }
+  };
   
   export const deleteVendor = async (vendorId: string) => {
     const response = await db.vendor.delete({
@@ -470,7 +470,7 @@ export const updateMarketDetails = async (
     const deletedUser = await db.user.delete({ where: { id: userId } })
   
     return deletedUser
-  }
+  };
   
   export const getUser = async (id: string) => {
     const user = await db.user.findUnique({
@@ -480,7 +480,7 @@ export const updateMarketDetails = async (
     })
   
     return user
-  }
+  };
   
   export const sendInvitation = async (
     role: Role,
@@ -506,7 +506,7 @@ export const updateMarketDetails = async (
     }
   
     return resposne
-  }
+  };
   
   export const getMedia = async (vendorId: string) => {
     const mediafiles = await db.vendor.findUnique({
@@ -516,7 +516,7 @@ export const updateMarketDetails = async (
       include: { Media: true },
     })
     return mediafiles
-  }
+  };
   
   export const createMedia = async (
     vendorId: string,
@@ -531,7 +531,7 @@ export const updateMarketDetails = async (
     })
   
     return response
-  }
+  };
   
   export const deleteMedia = async (mediaId: string) => {
     const response = await db.media.delete({
@@ -540,7 +540,7 @@ export const updateMarketDetails = async (
       },
     })
     return response
-  }
+  };
   
   export const getPipelineDetails = async (pipelineId: string) => {
     const response = await db.pipeline.findUnique({
@@ -549,7 +549,7 @@ export const updateMarketDetails = async (
       },
     })
     return response
-  }
+  };
   
   export const getLanesWithTicketAndTags = async (pipelineId: string) => {
     const response = await db.lane.findMany({
@@ -571,7 +571,7 @@ export const updateMarketDetails = async (
       },
     })
     return response
-  }
+  };
   
   export const upsertFunnel = async (
     vendorId: string,
@@ -589,7 +589,7 @@ export const updateMarketDetails = async (
     })
   
     return response
-  }
+  };
   
   export const upsertPipeline = async (
     pipeline: Prisma.PipelineUncheckedCreateWithoutLaneInput
@@ -601,14 +601,14 @@ export const updateMarketDetails = async (
     })
   
     return response
-  }
+  };
   
   export const deletePipeline = async (pipelineId: string) => {
     const response = await db.pipeline.delete({
       where: { id: pipelineId },
     })
     return response
-  }
+  };
   
   export const updateLanesOrder = async (lanes: Lane[]) => {
     try {
@@ -628,7 +628,7 @@ export const updateMarketDetails = async (
     } catch (error) {
       console.log(error, 'ERROR UPDATE LANES ORDER')
     }
-  }
+  };
   
   export const updateTicketsOrder = async (tickets: Ticket[]) => {
     try {
@@ -649,7 +649,7 @@ export const updateMarketDetails = async (
     } catch (error) {
       console.log(error, '🔴 ERROR UPDATE TICKET ORDER')
     }
-  }
+  };
   
   export const upsertLane = async (lane: Prisma.LaneUncheckedCreateInput) => {
     let order: number
@@ -673,7 +673,7 @@ export const updateMarketDetails = async (
     })
   
     return response
-  }
+  };
   
   export const deleteLane = async (laneId: string) => {
     const resposne = await db.lane.delete({ 
@@ -682,7 +682,7 @@ export const updateMarketDetails = async (
       } 
     })
     return resposne
-  }
+  };
   
   export const getTicketsWithTags = async (pipelineId: string) => {
     const response = await db.ticket.findMany({
@@ -694,7 +694,7 @@ export const updateMarketDetails = async (
       include: { Tags: true, Assigned: true, Customer: true },
     })
     return response
-  }
+  };
   
   export const _getTicketsWithAllRelations = async (laneId: string) => {
     const response = await db.ticket.findMany({
@@ -707,7 +707,7 @@ export const updateMarketDetails = async (
       },
     })
     return response
-  }
+  };
   
   export const getVendorTeamMembers = async (vendorId: string) => {
     const vendorUsersWithAccess = await db.user.findMany({
@@ -729,7 +729,7 @@ export const updateMarketDetails = async (
       },
     })
     return vendorUsersWithAccess
-  }
+  };
   
   export const searchContacts = async (searchTerms: string) => {
     const response = await db.contact.findMany({
@@ -740,7 +740,7 @@ export const updateMarketDetails = async (
       },
     })
     return response
-  }
+  };
   
   export const upsertTicket = async (
     ticket: Prisma.TicketUncheckedCreateInput,
@@ -771,7 +771,7 @@ export const updateMarketDetails = async (
     })
   
     return response
-  }
+  };
 
   export const deleteTicket = async (ticketId: string) => {
     const response = await db.ticket.delete({
@@ -781,7 +781,7 @@ export const updateMarketDetails = async (
     })
   
     return response
-  }
+  };
   
   export const upsertTag = async (
     vendorId: string,
@@ -794,7 +794,7 @@ export const updateMarketDetails = async (
     })
   
     return response
-  }
+  };
   
   export const getTagsForVendor = async (vendorId: string) => {
     const response = await db.vendor.findUnique({
@@ -802,12 +802,12 @@ export const updateMarketDetails = async (
       select: { Tags: true },
     })
     return response
-  }
+  };
   
   export const deleteTag = async (tagId: string) => {
     const response = await db.tag.delete({ where: { id: tagId } })
     return response
-  }
+  };
   
   export const upsertContact = async (
     contact: Prisma.ContactUncheckedCreateInput
@@ -818,7 +818,7 @@ export const updateMarketDetails = async (
       create: contact,
     })
     return response
-  }
+  };
 
   
   
@@ -829,7 +829,7 @@ export const updateMarketDetails = async (
   //   })
   
   //   return funnels
-  // }
+  // };
   
   // export const getFunnel = async (funnelId: string) => {
   //   const funnel = await db.funnel.findUnique({
@@ -844,7 +844,7 @@ export const updateMarketDetails = async (
   //   })
   
   //   return funnel
-  // }
+  // };
   
   // export const updateFunnelProducts = async (
   //   products: string,
@@ -855,7 +855,7 @@ export const updateMarketDetails = async (
   //     data: { liveProducts: products },
   //   })
   //   return data
-  // }
+  // };
   
   // export const upsertFunnelPage = async (
   //   vendorId: string,
@@ -885,13 +885,13 @@ export const updateMarketDetails = async (
   
   //   revalidatePath(`/vendor/${vendorId}/funnels/${funnelId}`, 'page')
   //   return response
-  // }
+  // };
   
   // export const deleteFunnelePage = async (funnelPageId: string) => {
   //   const response = await db.funnelPage.delete({ where: { id: funnelPageId } })
   
   //   return response
-  // }
+  // };
   
   // export const getFunnelPageDetails = async (funnelPageId: string) => {
   //   const response = await db.funnelPage.findUnique({
@@ -901,7 +901,7 @@ export const updateMarketDetails = async (
   //   })
   
   //   return response
-  // }
+  // };
   
   // export const getDomainContent = async (subDomainName: string) => {
   //   const response = await db.funnel.findUnique({
@@ -911,7 +911,7 @@ export const updateMarketDetails = async (
   //     include: { FunnelPages: true },
   //   })
   //   return response
-  // }
+  // };
   
   export const getPipelines = async (vendorId: string) => {
     const response = await db.pipeline.findMany({
@@ -923,4 +923,4 @@ export const updateMarketDetails = async (
       },
     })
     return response
-  }
+  };
