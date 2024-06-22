@@ -8,4 +8,4 @@ const page = ({params}: {params: {marketId: string}}) => {
   )
 }
 
-export default page
+export default page;

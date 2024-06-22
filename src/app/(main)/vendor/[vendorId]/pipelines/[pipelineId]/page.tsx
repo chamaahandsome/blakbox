@@ -67,4 +67,4 @@ const PipelinePage = async ({ params }: Props) => {
   )
 }
 
-export default PipelinePage
+export default PipelinePage;

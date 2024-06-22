@@ -21,4 +21,4 @@ const MediaPage = async ({ params }: Props) => {
   )
 }
 
-export default MediaPage
+export default MediaPage;

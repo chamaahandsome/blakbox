@@ -79,4 +79,4 @@ const PipelineSettings = ({
   )
 }
 
-export default PipelineSettings
+export default PipelineSettings;

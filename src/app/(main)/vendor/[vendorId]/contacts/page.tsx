@@ -113,7 +113,7 @@ const ContactPage = async ({ params }: Props) => {
   )
 }
 
-export default ContactPage
+export default ContactPage;
 
 
 

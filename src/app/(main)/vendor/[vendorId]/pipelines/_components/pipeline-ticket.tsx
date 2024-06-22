@@ -282,4 +282,4 @@ const PipelineTicket = ({
   )
 }
 
-export default PipelineTicket
+export default PipelineTicket;

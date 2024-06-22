@@ -284,7 +284,7 @@ type Props = {
 }
 
 const TagColors = ['BLUE', 'ORANGE', 'ROSE', 'PURPLE', 'GREEN'] as const
-export type TagColor = (typeof TagColors)[number]
+export type TagColor = (typeof TagColors)[number];
 
 const TagCreator = ({ getSelectedTags, vendorId, defaultTags }: Props) => {
   const [selectedTags, setSelectedTags] = useState<Tag[]>(defaultTags || [])
@@ -485,4 +485,4 @@ const TagCreator = ({ getSelectedTags, vendorId, defaultTags }: Props) => {
   )
 }
 
-export default TagCreator
+export default TagCreator;

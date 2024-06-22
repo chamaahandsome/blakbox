@@ -15,4 +15,4 @@ const BlurPage = ({ children }: Props) => {
   )
 }
 
-export default BlurPage
+export default BlurPage;

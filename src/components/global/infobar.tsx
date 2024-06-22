@@ -122,4 +122,4 @@ const InfoBar = ({ notifications, vendorId, className, role }: Props) => {
   )
 }
 
-export default InfoBar
+export default InfoBar;

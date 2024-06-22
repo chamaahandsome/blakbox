@@ -142,4 +142,4 @@ const LaneForm: React.FC<CreateLaneFormProps> = ({
   )
 }
 
-export default LaneForm
+export default LaneForm;

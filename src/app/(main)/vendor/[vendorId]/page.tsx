@@ -300,4 +300,4 @@ const VendorPageId = async ({ params, searchParams }: Props) => {
   )
 }
 
-export default VendorPageId
+export default VendorPageId;

@@ -26,4 +26,4 @@ const CircleProgress = ({ description, value = 0 }: Props) => {
   )
 }
 
-export default CircleProgress
+export default CircleProgress;

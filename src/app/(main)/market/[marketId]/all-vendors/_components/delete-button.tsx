@@ -33,4 +33,4 @@ const DeleteButton = ({ vendorId }: Props) => {
   )
 }
 
-export default DeleteButton
+export default DeleteButton;

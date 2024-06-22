@@ -9,4 +9,4 @@ const LoadingMarketPage = () => {
   )
 }
 
-export default LoadingMarketPage
+export default LoadingMarketPage;

@@ -341,7 +341,7 @@ const TicketForm = ({ getNewTicket, laneId, vendorId }: Props) => {
   )
 }
 
-export default TicketForm
+export default TicketForm;
 
 
 // 'use client'

@@ -35,4 +35,4 @@ const CustomModal = ({ children, defaultOpen, subheading, title }: Props) => {
   )
 }
 
-export default CustomModal
+export default CustomModal;

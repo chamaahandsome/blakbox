@@ -62,4 +62,4 @@ const SubscriptionForm = ({ selectedPriceId }: Props) => {
     </form>
   )
 }
-export default SubscriptionForm
+export default SubscriptionForm;

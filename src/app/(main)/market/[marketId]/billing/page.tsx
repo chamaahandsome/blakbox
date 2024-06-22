@@ -173,4 +173,4 @@ const page = async ({ params }: Props) => {
   )
 }
 
-export default page
+export default page;

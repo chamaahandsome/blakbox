@@ -69,4 +69,4 @@ const Sidebar = async ({ id, type }: Props) => {
   )
 }
 
-export default Sidebar
+export default Sidebar;

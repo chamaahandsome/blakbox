@@ -47,4 +47,4 @@ const SettingsPage = async ({ params }: Props) => {
   )
 }
 
-export default SettingsPage
+export default SettingsPage;

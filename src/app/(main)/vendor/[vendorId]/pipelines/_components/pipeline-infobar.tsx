@@ -106,4 +106,4 @@ const PipelineInfoBar = ({ pipelineId, pipelines, vendorId }: Props) => {
   )
 }
 
-export default PipelineInfoBar
+export default PipelineInfoBar;

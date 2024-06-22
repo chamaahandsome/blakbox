@@ -256,4 +256,4 @@ const PipelineLane: React.FC<PipelaneLaneProps> = ({
   )
 }
 
-export default PipelineLane
+export default PipelineLane;

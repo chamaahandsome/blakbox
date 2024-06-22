@@ -303,4 +303,4 @@ const ContactUserForm: React.FC<ContactUserFormProps> = ({ vendorId }) => {
   )
 }
 
-export default ContactUserForm
+export default ContactUserForm;

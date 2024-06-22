@@ -56,4 +56,4 @@ const VendorSettingPage = async ({ params }: Props) => {
   )
 }
 
-export default VendorSettingPage
+export default VendorSettingPage;

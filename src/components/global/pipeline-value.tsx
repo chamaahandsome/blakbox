@@ -118,4 +118,4 @@ const PipelineValue = ({ vendorId }: Props) => {
   )
 }
 
-export default PipelineValue
+export default PipelineValue;

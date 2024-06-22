@@ -52,7 +52,7 @@ export default authMiddleware({
       return NextResponse.rewrite(new URL(`${pathWithSearchParams}`, req.url))
     }
   },
-})
+});
 
 export const config = {
   matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],

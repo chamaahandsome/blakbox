@@ -39,4 +39,4 @@ const VendorMainPage = async ({ searchParams }: Props) => {
   return <Unauthorized />
 }
 
-export default VendorMainPage
+export default VendorMainPage;

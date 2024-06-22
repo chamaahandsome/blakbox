@@ -125,4 +125,4 @@ const SubscriptionFormWrapper = ({ customerId, planExists }: Props) => {
   )
 }
 
-export default SubscriptionFormWrapper
+export default SubscriptionFormWrapper;

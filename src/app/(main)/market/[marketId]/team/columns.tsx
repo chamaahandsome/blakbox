@@ -149,7 +149,7 @@ export const columns: ColumnDef<UsersWithMarketVendorPermissionsSidebarOptions>[
         return <CellActions rowData={rowData} />
       },
     },
-  ]
+  ];
 
 interface CellActionsProps {
   rowData: UsersWithMarketVendorPermissionsSidebarOptions

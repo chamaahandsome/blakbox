@@ -300,4 +300,4 @@ const MenuOptions = ({
   )
 }
 
-export default MenuOptions
+export default MenuOptions;

@@ -321,4 +321,4 @@ const VendorDetails: React.FC<VendorDetailsProps> = ({
   )
 }
 
-export default VendorDetails
+export default VendorDetails;

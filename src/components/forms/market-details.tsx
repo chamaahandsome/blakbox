@@ -474,4 +474,4 @@ const MarketDetails = ({ data }: Props) => {
   )
 }
 
-export default MarketDetails
+export default MarketDetails;

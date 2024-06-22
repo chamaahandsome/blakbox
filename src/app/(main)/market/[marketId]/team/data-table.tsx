@@ -130,4 +130,4 @@ export default function DataTable<TData, TValue>({
       </div>
     </>
   )
-}
+};

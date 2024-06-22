@@ -54,4 +54,4 @@ const TeamPage = async ({ params }: Props) => {
   )
 }
 
-export default TeamPage
+export default TeamPage;

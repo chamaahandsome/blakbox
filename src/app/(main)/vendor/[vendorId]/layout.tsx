@@ -72,4 +72,4 @@ const VendorLayout = async ({ children, params }: Props) => {
   )
 } 
 
-export default VendorLayout
+export default VendorLayout;

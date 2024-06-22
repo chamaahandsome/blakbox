@@ -137,4 +137,4 @@ const CreatePipelineForm: React.FC<CreatePipelineFormProps> = ({
   )
 }
 
-export default CreatePipelineForm
+export default CreatePipelineForm;

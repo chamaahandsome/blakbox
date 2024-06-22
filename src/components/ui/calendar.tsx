@@ -60,7 +60,7 @@ function Calendar({
       {...props}
     />
   )
-}
+};
 Calendar.displayName = "Calendar"
 
-export { Calendar }
+export { Calendar };

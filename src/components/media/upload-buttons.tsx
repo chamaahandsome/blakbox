@@ -31,4 +31,4 @@ const MediaUploadButton = ({ vendorId }: Props) => {
   )
 }
 
-export default MediaUploadButton
+export default MediaUploadButton;

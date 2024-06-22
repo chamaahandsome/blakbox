@@ -385,4 +385,4 @@ const UserDetails = ({ id, type, vendors, userData }: Props) => {
   )
 }
 
-export default UserDetails
+export default UserDetails;

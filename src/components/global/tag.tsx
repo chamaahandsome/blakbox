@@ -83,4 +83,4 @@ const TagComponent: React.FC<TagComponentProps> = ({
   )
 }
 
-export default TagComponent
+export default TagComponent;

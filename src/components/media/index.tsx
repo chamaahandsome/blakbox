@@ -57,4 +57,4 @@ const MediaComponent = ({ data, vendorId }: Props) => {
   )
 }
 
-export default MediaComponent
+export default MediaComponent;

@@ -26,4 +26,4 @@ const CraeteContactButton = ({ vendorId }: Props) => {
   return <Button onClick={handleCreateContact}>Create Contact</Button>
 }
 
-export default CraeteContactButton
+export default CraeteContactButton;

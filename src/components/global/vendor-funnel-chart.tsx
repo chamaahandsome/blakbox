@@ -21,7 +21,7 @@ const VendorFunnelChart = ({ data }: Props) => {
   )
 }
 
-export default VendorFunnelChart
+export default VendorFunnelChart;
 
 const customTooltip = ({
   payload,

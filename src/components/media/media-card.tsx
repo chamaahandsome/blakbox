@@ -116,4 +116,4 @@ const MediaCard = ({ file }: Props) => {
   )
 }
 
-export default MediaCard
+export default MediaCard;

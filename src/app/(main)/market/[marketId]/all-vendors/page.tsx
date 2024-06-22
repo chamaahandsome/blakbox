@@ -120,4 +120,4 @@ const AllVendorsPage = async ({ params }: Props) => {
   )
 }
 
-export default AllVendorsPage
+export default AllVendorsPage;

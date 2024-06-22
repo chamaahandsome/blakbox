@@ -41,4 +41,4 @@ const SubscriptionPlan = ({ customerId, planExists, prices }: Props) => {
   return <div>Your Subscription Plan</div>
 }
 
-export default SubscriptionPlan
+export default SubscriptionPlan;

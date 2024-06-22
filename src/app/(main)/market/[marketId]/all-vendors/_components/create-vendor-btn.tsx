@@ -54,4 +54,4 @@ const CreateVendorButton = ({ className, id, user }: Props) => {
   )
 }
 
-export default CreateVendorButton
+export default CreateVendorButton;

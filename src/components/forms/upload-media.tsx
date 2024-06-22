@@ -125,4 +125,4 @@ const UploadMediaForm = ({ vendorId }: Props) => {
   )
 }
 
-export default UploadMediaForm
+export default UploadMediaForm;

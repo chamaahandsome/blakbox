@@ -152,7 +152,7 @@
 // export default LaunchPadPage
 
 
-import { Button } from '@/components/ui/button'
+
 import {
   Card,
   CardContent,
@@ -176,6 +176,15 @@ type Props = {
 const LaunchPadPage = async ({ params, searchParams }: Props) => {
 
   console.log('Market LaunchPad SearchParams:', searchParams)
+
+// const LaunchPadPage = async ({
+//   params,
+//   searchParams
+// }: {
+//   params: { marketId: string };
+//   searchParams: { code: string };
+// }) => {
+//   console.log('Market LaunchPad SearchParams:', searchParams);
 
   const marketDetails = await db.market.findUnique({
     where: { id: params.marketId },
