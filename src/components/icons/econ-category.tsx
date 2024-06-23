@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BlakboxCategory = () => {
+const EconCategory = () => {
   return (
     <svg
       width="24"
@@ -45,4 +45,4 @@ const BlakboxCategory = () => {
   );
 };
 
-export default BlakboxCategory;
+export default EconCategory;

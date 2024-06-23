@@ -8,7 +8,8 @@ type Props = {
 }
 
 const VendorMainPage = async ({ searchParams }: Props) => {
-  console.log('Vendor LaunchPad SearchParams:', searchParams)
+  
+  console.log('Vendor Main SearchParams:', searchParams)
 
   const marketId = await verifyAndAcceptInvitation()
 

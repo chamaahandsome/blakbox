@@ -1,5 +1,5 @@
 import BarChart from '@/components/icons/bar_chart'
-import BlakboxCategory from '@/components/icons/blakbox-category'
+import EconCategory from '@/components/icons/econ-category'
 import Calendar from '@/components/icons/calendar'
 import CheckCircle from '@/components/icons/check_circled'
 import Chip from '@/components/icons/chip'
@@ -203,7 +203,7 @@ export const pricingCards = [
     {
       value: 'category',
       label: 'Category',
-      path: BlakboxCategory,
+      path: EconCategory,
     },
     {
       value: 'clipboardIcon',
@@ -211,3 +211,25 @@ export const pricingCards = [
       path: ClipboardIcon,
     },
   ];
+
+  export type EditorBtns =
+  | 'text'
+  | 'container'
+  | 'section'
+  | 'contactForm'
+  | 'paymentForm'
+  | 'link'
+  | '2Col'
+  | 'video'
+  | '__body'
+  | 'image'
+  | null
+  | '3Col'
+
+export const defaultStyles: React.CSSProperties = {
+  backgroundPosition: 'center',
+  objectFit: 'cover',
+  backgroundRepeat: 'no-repeat',
+  textAlign: 'left',
+  opacity: '100%',
+};

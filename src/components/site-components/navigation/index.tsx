@@ -17,7 +17,7 @@ const Navigation = ({user}: Props) => {
              src={'/assets/econ-logo.svg'}
              width={44}
              height={44}
-             alt='blakbox logo'
+             alt='econ logo'
             />
             <span className='text-l font-bold'>Market</span>
         </aside>

@@ -15,9 +15,9 @@ import {
 } from '@prisma/client'
 import { v4 } from 'uuid'
 import {
-  CreateFunnelFormSchema,
+  CreateShopFormSchema,
   CreateMediaType,
-  UpsertFunnelPage,
+  UpsertShopPage,
 } from './types'
 import { z } from 'zod'
 import { revalidatePath } from 'next/cache'
@@ -361,9 +361,9 @@ export const updateMarketDetails = async (
               link: `/vendor/${vendor.id}/settings`,
             },
             {
-              name: 'Funnels',
-              icon: 'pipelines',
-              link: `/vendor/${vendor.id}/funnels`,
+              name: 'Shops',
+              icon: 'flag',
+              link: `/vendor/${vendor.id}/shops`,
             },
             {
               name: 'Media',
@@ -377,7 +377,7 @@ export const updateMarketDetails = async (
             },
             {
               name: 'Pipelines',
-              icon: 'flag',
+              icon: 'pipelines',
               link: `/vendor/${vendor.id}/pipelines`,
             },
             {
@@ -573,17 +573,17 @@ export const updateMarketDetails = async (
     return response
   };
   
-  export const upsertFunnel = async (
+  export const upsertShop = async (
     vendorId: string,
-    funnel: z.infer<typeof CreateFunnelFormSchema> & { liveProducts: string },
-    funnelId: string
+    shop: z.infer<typeof CreateShopFormSchema> & { liveProducts: string },
+    shopId: string
   ) => {
-    const response = await db.funnel.upsert({
-      where: { id: funnelId },
-      update: funnel,
+    const response = await db.shop.upsert({
+      where: { id: shopId },
+      update: shop,
       create: {
-        ...funnel,
-        id: funnelId || v4(),
+        ...shop,
+        id: shopId || v4(),
         vendorId: vendorId,
       },
     })
@@ -822,96 +822,96 @@ export const updateMarketDetails = async (
 
   
   
-  // export const getFunnels = async (vendorId: string) => {
-  //   const funnels = await db.funnel.findMany({
-  //     where: { vendorId: vendorId },
-  //     include: { FunnelPages: true },
-  //   })
+  export const getShops = async (vendorId: string) => {
+    const shops = await db.shop.findMany({
+      where: { vendorId: vendorId },
+      include: { ShopPages: true },
+    })
   
-  //   return funnels
-  // };
+    return shops
+  };
   
-  // export const getFunnel = async (funnelId: string) => {
-  //   const funnel = await db.funnel.findUnique({
-  //     where: { id: funnelId },
-  //     include: {
-  //       FunnelPages: {
-  //         orderBy: {
-  //           order: 'asc',
-  //         },
-  //       },
-  //     },
-  //   })
+  export const getShop = async (shopId: string) => {
+    const shop = await db.shop.findUnique({
+      where: { id: shopId },
+      include: {
+        ShopPages: {
+          orderBy: {
+            order: 'asc',
+          },
+        },
+      },
+    })
   
-  //   return funnel
-  // };
+    return shop
+  };
   
-  // export const updateFunnelProducts = async (
-  //   products: string,
-  //   funnelId: string
-  // ) => {
-  //   const data = await db.funnel.update({
-  //     where: { id: funnelId },
-  //     data: { liveProducts: products },
-  //   })
-  //   return data
-  // };
+  export const updateShopProducts = async (
+    products: string,
+    shopId: string
+  ) => {
+    const data = await db.shop.update({
+      where: { id: shopId },
+      data: { liveProducts: products },
+    })
+    return data
+  };
   
-  // export const upsertFunnelPage = async (
-  //   vendorId: string,
-  //   funnelPage: UpsertFunnelPage,
-  //   funnelId: string
-  // ) => {
-  //   if (!vendorId || !funnelId) return
-  //   const response = await db.funnelPage.upsert({
-  //     where: { id: funnelPage.id || '' },
-  //     update: { ...funnelPage },
-  //     create: {
-  //       ...funnelPage,
-  //       content: funnelPage.content
-  //         ? funnelPage.content
-  //         : JSON.stringify([
-  //             {
-  //               content: [],
-  //               id: '__body',
-  //               name: 'Body',
-  //               styles: { backgroundColor: 'white' },
-  //               type: '__body',
-  //             },
-  //           ]),
-  //       funnelId,
-  //     },
-  //   })
+  export const upsertShopPage = async (
+    vendorId: string,
+    shopPage: UpsertShopPage,
+    shopId: string
+  ) => {
+    if (!vendorId || !shopId) return
+    const response = await db.shopPage.upsert({
+      where: { id: shopPage.id || '' },
+      update: { ...shopPage },
+      create: {
+        ...shopPage,
+        content: shopPage.content
+          ? shopPage.content
+          : JSON.stringify([
+              {
+                content: [],
+                id: '__body',
+                name: 'Body',
+                styles: { backgroundColor: 'white' },
+                type: '__body',
+              },
+            ]),
+        shopId,
+      },
+    })
   
-  //   revalidatePath(`/vendor/${vendorId}/funnels/${funnelId}`, 'page')
-  //   return response
-  // };
+    revalidatePath(`/vendor/${vendorId}/shops/${shopId}`, 'page')
+    return response
+  };
   
-  // export const deleteFunnelePage = async (funnelPageId: string) => {
-  //   const response = await db.funnelPage.delete({ where: { id: funnelPageId } })
+  export const deleteShopePage = async (shopPageId: string) => {
+    const response = await db.shopPage.delete({ where: { id: shopPageId } })
   
-  //   return response
-  // };
+    return response
+  };
   
-  // export const getFunnelPageDetails = async (funnelPageId: string) => {
-  //   const response = await db.funnelPage.findUnique({
-  //     where: {
-  //       id: funnelPageId,
-  //     },
-  //   })
+  export const getShopPageDetails = async (shopPageId: string) => {
+    const response = await db.shopPage.findUnique({
+      where: {
+        id: shopPageId,
+      },
+    })
   
-  //   return response
-  // };
+    return response
+  };
   
-  // export const getDomainContent = async (subDomainName: string) => {
-  //   const response = await db.funnel.findUnique({
-  //     where: {
-  //       subDomainName,
-  //     },
-  //     include: { FunnelPages: true },
-  //   })
-  //   return response
-  // };
+  export const getDomainContent = async (subDomainName: string) => {
+    const response = await db.shop.findUnique({
+      where: {
+        subDomainName,
+      },
+      include: { ShopPages: true },
+    })
+    return response
+  };
   
   export const getPipelines = async (vendorId: string) => {
     const response = await db.pipeline.findMany({

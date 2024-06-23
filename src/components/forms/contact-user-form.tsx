@@ -68,7 +68,7 @@
 //       })
 //       toast({
 //         title: 'Success',
-//         description: 'Saved funnel details',
+//         description: 'Saved shop details',
 //       })
 //       setClose()
 //       router.refresh()
@@ -76,7 +76,7 @@
 //       toast({
 //         variant: 'destructive',
 //         title: 'Oppse!',
-//         description: 'Could not save funnel details',
+//         description: 'Could not save shop details',
 //       })
 //     }
 //   }

@@ -54,7 +54,7 @@ import { Plan } from '@prisma/client'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-const MarketPage = async ({
+const Page = async ({
   searchParams
 }: {
   searchParams: { plan: Plan; state: string; code: string };
@@ -97,4 +97,4 @@ const MarketPage = async ({
   )
 }
 
-export default MarketPage;
+export default Page;

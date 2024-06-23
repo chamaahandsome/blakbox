@@ -87,6 +87,8 @@ model Market {
   id               String                @id @default(uuid())
   connectAccountId String?               @default("")
   customerId       String                @default("")
+  accessToken      String?
+  refreshToken     String?  
   name             String
   marketLogo       String                @db.Text
   companyEmail     String                @db.Text
@@ -112,6 +114,8 @@ model Market {
 model Vendor {
   id               String                    @id @default(uuid())
   connectAccountId String?                   @default("")
+  accessToken      String?
+  refreshToken     String?
   name             String
   vendorLogo       String                    @db.Text
   createdAt        DateTime                  @default(now())
@@ -128,7 +132,7 @@ model Vendor {
   Market           Market                    @relation(fields: [marketId], references: [id], onDelete: Cascade)
   SidebarOption    VendorSidebarOption[]
   Permissions      Permissions[]
-  Funnels          Funnel[]
+  Shops          Shop[]
   Media            Media[]
   Contact          Contact[]
   Trigger          Trigger[]
@@ -293,7 +297,7 @@ model Media {
   @@index([vendorId])
 }
 
-model Funnel {
+model Shop {
   id            String       @id @default(uuid())
   name          String
   createdAt     DateTime     @default(now())
@@ -304,7 +308,7 @@ model Funnel {
   favicon       String?      @db.Text
   vendorId      String
   Vendor        Vendor       @relation(fields: [vendorId], references: [id], onDelete: Cascade)
-  FunnelPages   FunnelPage[]
+  ShopPages   ShopPage[]
   liveProducts  String?      @default("[]")
   ClassName     ClassName[]
 
@@ -317,14 +321,14 @@ model ClassName {
   color      String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  funnelId   String
+  shopId   String
   customData String?  @db.LongText
-  Funnel     Funnel   @relation(fields: [funnelId], references: [id], onDelete: Cascade)
+  Shop     Shop   @relation(fields: [shopId], references: [id], onDelete: Cascade)
 
-  @@index([funnelId])
+  @@index([shopId])
 }
 
-model FunnelPage {
+model ShopPage {
   id           String   @id @default(uuid())
   name         String
   pathName     String   @default("")
@@ -334,10 +338,10 @@ model FunnelPage {
   content      String?  @db.LongText
   order        Int
   previewImage String?  @db.Text
-  funnelId     String
-  Funnel       Funnel   @relation(fields: [funnelId], references: [id], onDelete: Cascade)
+  shopId     String
+  Shop       Shop   @relation(fields: [shopId], references: [id], onDelete: Cascade)
 
-  @@index([funnelId])
+  @@index([shopId])
 }
 
 model MarketSidebarOption {

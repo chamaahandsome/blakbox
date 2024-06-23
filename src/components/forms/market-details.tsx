@@ -437,7 +437,7 @@ const MarketDetails = ({ data }: Props) => {
               </div>
               <div className="text-muted-foreground">
                 Deleting your market CANNOT BE UNDONE. This will also delete all
-                vendors and all data related to your vendors. Vendorss will no longer have access to funnels, contacts etc.
+                vendors and all data related to your vendors. Vendorss will no longer have access to shops, contacts etc.
               </div>
               <AlertDialogTrigger
                 disabled={isLoading || deletingMarket}

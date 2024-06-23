@@ -11,7 +11,7 @@ import {
   import {
     _getTicketsWithAllRelations,
     getAuthUserDetails,
-    getFunnels,
+    getShops,
     getMedia,
     getPipelineDetails,
     getTicketsWithTags,
@@ -42,10 +42,10 @@ import Stripe from 'stripe'
     typeof getUserPermissions
   >;
   
-//   export const FunnelPageSchema = z.object({
-//     name: z.string().min(1),
-//     pathName: z.string().optional(),
-//   })
+  export const ShopPageSchema = z.object({
+    name: z.string().min(1),
+    pathName: z.string().optional(),
+  })
   
   const __getUsersWithMarketVendorPermissionsSidebarOptions = async (
     marketId: string
@@ -85,7 +85,7 @@ import Stripe from 'stripe'
     name: z.string().min(1),
   });
   
-  export const CreateFunnelFormSchema = z.object({
+  export const CreateShopFormSchema = z.object({
     name: z.string().min(1),
     description: z.string(),
     subDomainName: z.string().optional(),
@@ -149,8 +149,8 @@ import Stripe from 'stripe'
   
   export type PricesList = Stripe.ApiList<Stripe.Price>;
   
-//   export type FunnelsForVendor = Prisma.PromiseReturnType<
-//     typeof getFunnels
-//   >[0];
+  export type ShopsForVendor = Prisma.PromiseReturnType<
+    typeof getShops
+  >[0];
   
-//   export type UpsertFunnelPage = Prisma.FunnelPageCreateWithoutFunnelInput;
+  export type UpsertShopPage = Prisma.ShopPageCreateWithoutShopInput;

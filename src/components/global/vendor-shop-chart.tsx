@@ -4,13 +4,13 @@ import React from 'react'
 
 type Props = { data: any }
 
-const VendorFunnelChart = ({ data }: Props) => {
+const VendorShopChart = ({ data }: Props) => {
   return (
     <div className="h-fit flex transition-all items-start">
       <DonutChart
         className="h-40 w-40"
         data={data}
-        category="totalFunnelVisits"
+        category="totalShopVisits"
         index="name"
         colors={['blue-400', 'primary', 'blue-600', 'blue-700', 'blue-800']}
         showAnimation={true}
@@ -21,7 +21,7 @@ const VendorFunnelChart = ({ data }: Props) => {
   )
 }
 
-export default VendorFunnelChart;
+export default VendorShopChart;
 
 const customTooltip = ({
   payload,
@@ -51,7 +51,7 @@ const customTooltip = ({
           </div>
         </div>
       </div>
-      {categoryPayload.payload.FunnelPages?.map((page: any) => (
+      {categoryPayload.payload.ShopPages?.map((page: any) => (
         <div
           key={page.id}
           className="dark:text-white/70 text-black flex justify-between items-center"

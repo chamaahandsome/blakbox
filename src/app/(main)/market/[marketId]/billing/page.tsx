@@ -73,7 +73,7 @@ const page = async ({ params }: Props) => {
       <Separator className=" mb-6" />
       <h2 className="text-2xl p-4">Current Plan</h2>
       <div className="flex flex-col lg:!flex-row justify-between gap-8">
-        <PricingCard
+      <PricingCard
           planExists={marketSubscription?.Subscription?.active === true}
           prices={prices.data}
           customerId={marketSubscription?.customerId || ''}
@@ -88,7 +88,7 @@ const page = async ({ params }: Props) => {
               : 'Get Started'
           }
           highlightDescription="Want to modify your plan? You can do this here. If you have
-          further question contact support@econ.market"
+          further question contact support@plura-app.com"
           highlightTitle="Plan Options"
           description={
             marketSubscription?.Subscription?.active === true
@@ -128,7 +128,7 @@ const page = async ({ params }: Props) => {
             duration="/ month"
             features={[]}
             title={'24/7 priority support'}
-            highlightTitle="Get support now!" 
+            highlightTitle="Get support now!"
             highlightDescription="Get priority support and skip the long long with the click of a button."
           />
         ))}

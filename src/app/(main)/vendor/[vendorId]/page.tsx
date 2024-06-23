@@ -1,7 +1,7 @@
 import BlurPage from '@/components/global/blur-page'
 import CircleProgress from '@/components/global/circle-progress'
 import PipelineValue from '@/components/global/pipeline-value'
-import VendorFunnelChart from '@/components/global/vendor-funnel-chart'
+import VendorShopChart from '@/components/global/vendor-shop-chart'
 import { Badge } from '@/components/ui/badge'
 import {
   Card,
@@ -104,18 +104,18 @@ const VendorPageId = async ({ params, searchParams }: Props) => {
     ).toFixed(2)
   }
 
-  const funnels = await db.funnel.findMany({
+  const shops = await db.shop.findMany({
     where: {
       vendorId: params.vendorId,
     },
     include: {
-      FunnelPages: true,
+      ShopPages: true,
     },
   })
 
-  const funnelPerformanceMetrics = funnels.map((funnel) => ({
-    ...funnel,
-    totalFunnelVisits: funnel.FunnelPages.reduce(
+  const shopPerformanceMetrics = shops.map((shop) => ({
+    ...shop,
+    totalShopVisits: shop.ShopPages.reduce(
       (total, page) => total + page.visits,
       0
     ),
@@ -214,13 +214,13 @@ const VendorPageId = async ({ params, searchParams }: Props) => {
           <div className="flex gap-4 flex-col xl:!flex-row">
             <Card className="relative">
               <CardHeader>
-                <CardDescription>Funnel Performance</CardDescription>
+                <CardDescription>Shop Performance</CardDescription>
               </CardHeader>
               <CardContent className=" text-sm text-muted-foreground flex flex-col gap-12 justify-between ">
-                <VendorFunnelChart data={funnelPerformanceMetrics} />
+                <VendorShopChart data={shopPerformanceMetrics} />
                 <div className="lg:w-[150px]">
-                  Total page visits across all funnels. Hover over to get more
-                  details on funnel page performance.
+                  Total page visits across all shops. Hover over to get more
+                  details on shop page performance.
                 </div>
               </CardContent>
               <Contact2 className="absolute right-4 top-4 text-muted-foreground" />

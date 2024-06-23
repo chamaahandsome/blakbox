@@ -18,7 +18,7 @@ import {
   CardContent,
 } from '@/components/ui/card'
 import { useForm } from 'react-hook-form'
-import { Funnel, Lane, Pipeline } from '@prisma/client'
+import { Shop, Lane, Pipeline } from '@prisma/client'
 import { Input } from '../ui/input'
 
 import { Button } from '../ui/button'
