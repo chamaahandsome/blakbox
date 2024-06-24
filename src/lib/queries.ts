@@ -370,11 +370,11 @@ export const updateMarketDetails = async (
               icon: 'database',
               link: `/vendor/${vendor.id}/media`,
             },
-            {
-              name: 'Automations',
-              icon: 'chip',
-              link: `/vendor/${vendor.id}/automations`,
-            },
+            // {
+            //   name: 'Automations',
+            //   icon: 'chip',
+            //   link: `/vendor/${vendor.id}/automations`,
+            // },
             {
               name: 'Pipelines',
               icon: 'pipelines',

@@ -132,7 +132,7 @@ model Vendor {
   Market           Market                    @relation(fields: [marketId], references: [id], onDelete: Cascade)
   SidebarOption    VendorSidebarOption[]
   Permissions      Permissions[]
-  Shops          Shop[]
+  Shops            Shop[]
   Media            Media[]
   Contact          Contact[]
   Trigger          Trigger[]
@@ -199,7 +199,7 @@ model Ticket {
   Customer       Contact? @relation(fields: [customerId], references: [id], onDelete: SetNull)
 
   assignedUserId String?
-  Assigned       User?   @relation(fields: [assignedUserId], references: [id], onDelete: SetNull)
+  Assigned       User?    @relation(fields: [assignedUserId], references: [id], onDelete: SetNull)
 
   @@index([laneId])
   @@index([customerId])
@@ -308,7 +308,7 @@ model Shop {
   favicon       String?      @db.Text
   vendorId      String
   Vendor        Vendor       @relation(fields: [vendorId], references: [id], onDelete: Cascade)
-  ShopPages   ShopPage[]
+  ShopPages     ShopPage[]
   liveProducts  String?      @default("[]")
   ClassName     ClassName[]
 
@@ -321,9 +321,9 @@ model ClassName {
   color      String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  shopId   String
+  shopId     String
   customData String?  @db.LongText
-  Shop     Shop   @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  Shop       Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
 
   @@index([shopId])
 }
@@ -338,8 +338,8 @@ model ShopPage {
   content      String?  @db.LongText
   order        Int
   previewImage String?  @db.Text
-  shopId     String
-  Shop       Shop   @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  shopId       String
+  Shop         Shop      @relation(fields: [shopId], references: [id], onDelete: Cascade)
 
   @@index([shopId])
 }
