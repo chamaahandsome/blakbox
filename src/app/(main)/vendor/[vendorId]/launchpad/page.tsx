@@ -23,7 +23,7 @@ type Props = {
   params: { vendorId: string }
 }
 
-const LaunchPad = async ({ params, searchParams }: Props) => {
+const VendorLaunchPad = async ({ params, searchParams }: Props) => {
   
   console.log('Vendor LaunchPad SearchParams:', searchParams);
 
@@ -159,4 +159,4 @@ const LaunchPad = async ({ params, searchParams }: Props) => {
   )
 }
 
-export default LaunchPad;
+export default VendorLaunchPad;

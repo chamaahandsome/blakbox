@@ -20,7 +20,7 @@ type Props = {
   searchParams: { code: string }
 }
 
-const LaunchPadPage = async ({ params, searchParams }: Props) => {
+const MarketLaunchPad = async ({ params, searchParams }: Props) => {
   console.log('Market LaunchPad SearchParams:', searchParams);
   
   const marketDetails = await db.market.findUnique({
@@ -154,5 +154,6 @@ const LaunchPadPage = async ({ params, searchParams }: Props) => {
   )
 }
 
-export default LaunchPadPage
+export default MarketLaunchPad
+
 
