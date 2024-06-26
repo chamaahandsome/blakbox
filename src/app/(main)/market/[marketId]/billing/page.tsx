@@ -88,7 +88,7 @@ const page = async ({ params }: Props) => {
               : 'Get Started'
           }
           highlightDescription="Want to modify your plan? You can do this here. If you have
-          further question contact support@plura-app.com"
+          further question contact support@econ.market"
           highlightTitle="Plan Options"
           description={
             marketSubscription?.Subscription?.active === true
